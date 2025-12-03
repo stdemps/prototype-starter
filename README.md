@@ -148,10 +148,6 @@ npx shadcn@latest add [component-name]
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Cursor Documentation](https://cursor.sh/docs)
 
-## Migration from Parent Project
-
-If you're migrating this template from a parent project, see [MIGRATE.md](./MIGRATE.md) for instructions.
-
 ## License
 
 MIT

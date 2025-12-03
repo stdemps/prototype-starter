@@ -34,7 +34,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Migration scripts (remove after migration)
-# migrate-to-separate-repo.sh
-# MIGRATE.md
