@@ -47,8 +47,20 @@ This file should include:
 1. [Priority 1]
 2. [Priority 2]
 
+## Design & Development Standards
+
+### CRITICAL: Mobile-First Requirement
+This project uses **mobile-first responsive design** for ALL features. Before starting any UI work:
+- ✅ Review the [Responsive Design Checklist](../../../docs/reviewers/responsive-design-checklist.md)
+- ✅ Start with mobile layout (no breakpoint prefix)
+- ✅ Enhance for larger screens with `md:` and `lg:` prefixes
+- ❌ NEVER build desktop-first and retrofit mobile
+
+**Why this matters:** Building desktop-first and retrofitting mobile leads to significant rework, inconsistent patterns, and poor mobile user experience. The responsive design checklist and updated guidelines prevent this from happening.
+
 ## Resources
 
+- **Responsive Design Checklist:** [/docs/reviewers/responsive-design-checklist.md](../../../docs/reviewers/responsive-design-checklist.md) ⭐ **READ THIS FIRST**
 - [Link to documentation]
 - [Link to design system]
 ```

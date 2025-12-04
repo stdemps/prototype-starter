@@ -4,17 +4,34 @@ alwaysApply: true
 
 ## Mobile Responsiveness Requirements
 
+### CRITICAL: Mobile-First is Non-Negotiable
+**Default to mobile-first for ALL features unless explicitly justified otherwise.**
+
+This project experienced significant rework due to desktop-first implementation. To prevent this:
+- ✅ **ALWAYS start with mobile layout** (no breakpoint prefix = mobile)
+- ✅ **Build mobile experience FIRST, then enhance for larger screens**
+- ✅ **Review the [Responsive Design Checklist](../../../docs/reviewers/responsive-design-checklist.md) before starting any UI work**
+- ❌ **NEVER build desktop-first and add mobile as afterthought**
+
 ### Breakpoints (Tailwind Default)
+- **default (no prefix):** 0px+ (mobile) - **START HERE**
 - **sm:** 640px and up (small tablets, large phones)
 - **md:** 768px and up (tablets)
 - **lg:** 1024px and up (desktops)
 - **xl:** 1280px and up (large desktops)
 - **2xl:** 1536px and up (extra large desktops)
 
+### Key Breakpoints for This Project
+- **default (mobile):** 0px+ - Primary experience
+- **md:** 768px+ - Enhanced spacing and layout
+- **lg:** 1024px+ - Full desktop features (e.g., split panels)
+
 ### Mobile-First Approach
 - **Always design mobile-first:** Start with mobile layout, enhance for larger screens
 - **Use responsive utilities:** `sm:`, `md:`, `lg:`, `xl:`, `2xl:` prefixes
+- **Mobile classes have NO prefix:** `p-4` is mobile, `md:p-6` is tablet+
 - **Test on real devices:** Don't rely solely on browser dev tools
+- **Verify responsive scale:** Spacing, typography, and sizing must scale consistently
 
 ### Mobile-Specific Requirements
 
@@ -49,18 +66,85 @@ alwaysApply: true
 - Swipe gestures where appropriate (but always provide button alternative)
 
 ### Example Mobile Patterns
+
+#### ✅ CORRECT: Mobile-First
 ```tsx
-// Responsive container
-<div className="container mx-auto px-4 md:px-6 lg:px-8">
-
-// Responsive grid
+// Start with mobile (no prefix), enhance for larger screens
+<div className="flex flex-col gap-3 lg:flex-row lg:gap-6">
+<div className="p-4 md:p-5 lg:p-6">
+<div className="text-xs md:text-sm lg:text-base">
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+```
 
-// Responsive text
-<h1 className="text-2xl md:text-3xl lg:text-4xl">
+#### ❌ WRONG: Desktop-First
+```tsx
+// DON'T do this - requires reverse engineering for mobile
+<div className="flex gap-6 lg:flex-col lg:gap-3">
+<div className="p-8 md:p-6 lg:p-4">
+```
 
-// Responsive spacing
-<div className="p-4 md:p-6 lg:p-8">
+### Standard Responsive Scales (Use These)
+
+**Spacing (padding/margin/gap):**
+```tsx
+p-4 md:p-5 lg:p-6           // Card padding
+gap-3 md:gap-4 lg:gap-6     // Layout gaps
+px-4 md:px-6 lg:px-8        // Container horizontal padding
+```
+
+**Typography:**
+```tsx
+text-xs md:text-sm                    // Small text (labels, captions)
+text-sm md:text-base                  // Body text
+text-base md:text-lg                  // Emphasized text
+text-lg md:text-xl lg:text-2xl       // Headings
+```
+
+**Component Sizing:**
+```tsx
+h-9 md:h-10 lg:h-11          // Button heights
+h-4 w-4 md:h-5 md:w-5        // Icon sizes
+w-12 h-12 md:w-16 md:h-16    // Avatar/badge sizes
+```
+
+**Layout Patterns:**
+```tsx
+// Stack mobile, row desktop
+flex flex-col lg:flex-row
+
+// Single column mobile, multi-column desktop
+grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+
+// Full width mobile, constrained desktop
+w-full lg:max-w-3xl
+
+// Hide on mobile, show desktop
+hidden lg:block
+
+// Show on mobile, hide desktop
+lg:hidden
+```
+
+### Anti-Patterns to Avoid
+
+❌ **Fixed dimensions without responsive alternatives:**
+```tsx
+<div className="w-64 h-48">  // BAD: Fixed everywhere
+```
+
+✅ **Responsive dimensions:**
+```tsx
+<div className="w-full md:w-64 h-auto">  // GOOD: Adapts
+```
+
+❌ **Building desktop-first:**
+```tsx
+<div className="flex-row lg:flex-col">  // BAD: Backward
+```
+
+✅ **Building mobile-first:**
+```tsx
+<div className="flex-col lg:flex-row">  // GOOD: Progressive
 ```
 
 ---
@@ -297,14 +381,33 @@ import { CheckCircle2, XCircle, AlertCircle } from "lucide-react"
 5. **Browser test:** Test in Chrome, Firefox, Safari (at minimum)
 
 ### Design Review Checklist
-- [ ] Mobile responsive (test on actual device or responsive mode)
+
+**CRITICAL - Responsive Design (Check FIRST):**
+- [ ] **Mobile-first approach used** (no-prefix classes for mobile, breakpoint prefixes for larger)
+- [ ] **All three layouts designed:** Mobile (default), Tablet (md), Desktop (lg)
+- [ ] **Spacing scales consistently:** `p-4 md:p-5 lg:p-6` pattern
+- [ ] **Typography scales consistently:** `text-xs md:text-sm` pattern
+- [ ] **Touch targets minimum 44x44px** on mobile (use `h-11` for buttons)
+- [ ] **Tested at key sizes:** 375px (mobile), 768px (tablet), 1024px (desktop)
+- [ ] **No horizontal scroll** at any breakpoint
+- [ ] **Content prioritized** for mobile (what's most important?)
+- [ ] **See [Responsive Design Checklist](../../../docs/reviewers/responsive-design-checklist.md) for complete requirements**
+
+**Accessibility:**
 - [ ] Keyboard accessible (tab through entire interface)
 - [ ] Screen reader friendly (test with VoiceOver/NVDA)
 - [ ] Color contrast meets WCAG AA standards
 - [ ] Focus indicators visible on all interactive elements
+
+**States & Feedback:**
 - [ ] Error states handled gracefully
 - [ ] Loading states provide feedback
 - [ ] Empty states are helpful and actionable
+
+**Device Testing:**
+- [ ] Test on actual mobile device (not just DevTools)
+- [ ] Test in both portrait and landscape
+- [ ] Test on multiple browsers (Chrome, Safari, Firefox)
 
 ---
 

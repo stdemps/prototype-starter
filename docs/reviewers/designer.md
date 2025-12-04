@@ -72,6 +72,7 @@ Organize your feedback as:
    - Screen size and layout constraints
    - Performance and loading states
    - Platform-specific patterns
+   - **CRITICAL:** Use the [Responsive Design Checklist](responsive-design-checklist.md) to verify all responsive requirements are specified
 
 6. **Design System & Consistency** (Does this fit our design language?)
    - Component reuse opportunities
