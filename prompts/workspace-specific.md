@@ -67,44 +67,44 @@ A complete PRD document following the template structure with all sections fille
 
 **When to use:** When you have a draft PRD and want to get comprehensive feedback from different perspectives
 
-**Context needed:** PRD file path and which reviewers you want feedback from
+**Context needed:** PRD file path and which agents you want feedback from
 
 ---
 
 ## Prompt
 
 ```
-Review the PRD at [prd-file-path] from the following perspectives:
+Review the PRD at [prd-file-path] using the following agents:
 
-**Reviewers to include:**
-- [ ] Engineering (technical feasibility)
-- [ ] Design (UX and visual design)
+**Agents to include:**
+- [ ] Engineer (technical feasibility)
+- [ ] Designer (UX and visual design)
 - [ ] Executive (strategic business)
-- [ ] User Research (user needs and validation)
+- [ ] User Researcher (user needs and validation)
 
 **Instructions:**
-For each selected reviewer, provide feedback from their perspective using the reviewer guidelines in docs/reviewers/[reviewer-name].md. Structure the feedback according to their review structure guidelines.
+For each selected agent, provide feedback from their perspective using the agent definition in agents/[agent-name].md. Structure the feedback according to their review structure.
 
 **PRD to review:**
 [Reference the PRD file]
 
 **Additional context:**
-[Any specific areas you want reviewers to focus on, or questions you have]
+[Any specific areas you want agents to focus on, or questions you have]
 ```
 
 ## Example Usage
 
 **Input:**
 ```
-Review the PRD at docs/prds/task-management-prd.md from the following perspectives:
+Review the PRD at docs/prds/task-management-prd.md using the following agents:
 
-**Reviewers to include:**
-- [x] Engineering (technical feasibility)
-- [x] Design (UX and visual design)
+**Agents to include:**
+- [x] Engineer (technical feasibility)
+- [x] Designer (UX and visual design)
 - [ ] Executive (strategic business)
-- [x] User Research (user needs and validation)
+- [x] User Researcher (user needs and validation)
 
-Please provide comprehensive feedback from each selected reviewer's perspective, following their review structure guidelines.
+Please provide comprehensive feedback from each selected agent's perspective.
 
 **PRD to review:**
 ```1:135:docs/prds/task-management-prd.md
@@ -116,7 +116,7 @@ I'm particularly concerned about the technical complexity of real-time updates a
 ```
 
 **Expected Output:**
-Structured feedback from each selected reviewer following their specific review guidelines
+Structured feedback from each selected agent following their review structure
 
 ---
 
@@ -133,16 +133,16 @@ Structured feedback from each selected reviewer following their specific review 
 ## Prompt
 
 ```
-Review the PRD at [prd-file-path] from an Engineering perspective.
+As the Engineer agent (see agents/engineer.md), review the PRD at [prd-file-path].
 
-**Instructions:**
-Act as the Engineering Reviewer following the guidelines in docs/reviewers/engineer.md. Provide feedback structured as:
+Provide feedback structured as:
 1. Technical Feasibility
 2. Implementation Complexity
 3. Key Challenges
 4. Performance & Scalability
-5. Recommendations
-6. Open Questions
+5. Security Considerations
+6. Recommendations
+7. Open Questions
 
 **PRD to review:**
 [Reference the PRD file]
@@ -155,9 +155,7 @@ Act as the Engineering Reviewer following the guidelines in docs/reviewers/engin
 
 **Input:**
 ```
-Review the PRD at docs/prds/task-management-prd.md from an Engineering perspective.
-
-Act as the Engineering Reviewer and provide comprehensive technical feedback following the structure in docs/reviewers/engineer.md.
+As the Engineer agent, review the PRD at docs/prds/task-management-prd.md.
 
 **PRD to review:**
 ```1:135:docs/prds/task-management-prd.md
@@ -186,10 +184,9 @@ Engineering review with technical feasibility, complexity estimates, challenges,
 ## Prompt
 
 ```
-Review the PRD at [prd-file-path] from a Design perspective.
+As the Designer agent (see agents/designer.md), review the PRD at [prd-file-path].
 
-**Instructions:**
-Act as the Designer Reviewer following the guidelines in docs/reviewers/designer.md. Provide feedback structured as:
+Provide feedback structured as:
 1. User Experience Flow
 2. Visual Design Requirements
 3. Interaction Design
@@ -210,9 +207,7 @@ Act as the Designer Reviewer following the guidelines in docs/reviewers/designer
 
 **Input:**
 ```
-Review the PRD at docs/prds/task-management-prd.md from a Design perspective.
-
-Act as the Designer Reviewer and provide comprehensive UX/design feedback following the structure in docs/reviewers/designer.md.
+As the Designer agent, review the PRD at docs/prds/task-management-prd.md.
 
 **PRD to review:**
 ```1:135:docs/prds/task-management-prd.md
@@ -241,10 +236,9 @@ Design review with user flows, UI requirements, accessibility considerations, an
 ## Prompt
 
 ```
-Review the PRD at [prd-file-path] from an Executive perspective.
+As the Executive agent (see agents/executive.md), review the PRD at [prd-file-path].
 
-**Instructions:**
-Act as the Executive Reviewer following the guidelines in docs/reviewers/executive.md. Provide feedback structured as:
+Provide feedback structured as:
 1. Strategic Alignment
 2. Business Impact
 3. Resource Requirements
@@ -264,9 +258,7 @@ Act as the Executive Reviewer following the guidelines in docs/reviewers/executi
 
 **Input:**
 ```
-Review the PRD at docs/prds/task-management-prd.md from an Executive perspective.
-
-Act as the Executive Reviewer and provide strategic business feedback following the structure in docs/reviewers/executive.md.
+As the Executive agent, review the PRD at docs/prds/task-management-prd.md.
 
 **PRD to review:**
 ```1:135:docs/prds/task-management-prd.md
@@ -295,10 +287,9 @@ Executive review with strategic alignment, business impact assessment, resource 
 ## Prompt
 
 ```
-Review the PRD at [prd-file-path] from a User Research perspective.
+As the User Researcher agent (see agents/user-researcher.md), review the PRD at [prd-file-path].
 
-**Instructions:**
-Act as the User Research Reviewer following the guidelines in docs/reviewers/user-researcher.md. Provide feedback structured as:
+Provide feedback structured as:
 1. User Need Validation
 2. User Segments & Personas
 3. Usability & Adoption
@@ -319,9 +310,7 @@ Act as the User Research Reviewer following the guidelines in docs/reviewers/use
 
 **Input:**
 ```
-Review the PRD at docs/prds/task-management-prd.md from a User Research perspective.
-
-Act as the User Research Reviewer and provide user-focused feedback following the structure in docs/reviewers/user-researcher.md.
+As the User Researcher agent, review the PRD at docs/prds/task-management-prd.md.
 
 **PRD to review:**
 ```1:135:docs/prds/task-management-prd.md
