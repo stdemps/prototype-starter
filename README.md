@@ -1,6 +1,8 @@
-# Workspace Template
+# Prototype Starter
 
-A reusable workspace template for rapid prototyping with Next.js, TypeScript, Tailwind CSS, and shadcn/ui. Pre-configured with Cursor rules, documentation templates, and full dark mode support.
+A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tailwind CSS, and shadcn/ui. Pre-configured with Cursor rules, documentation templates, and full dark mode support.
+
+> **Need comprehensive product development features?** Check out [product-workspace](https://github.com/stdemps/product-workspace) for multi-agent collaboration, quality gates, and mobile-first enforcement.
 
 ## Features
 
@@ -140,6 +142,31 @@ npx shadcn@latest add [component-name]
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+
+## Related Projects
+
+### Prototype Starter vs Product Workspace
+
+This repository (**prototype-starter**) is designed for rapid prototyping with:
+- Minimal setup and configuration
+- Fast onboarding (< 5 minutes)
+- Zero opinions on development workflow
+- Simple Cursor rules and documentation templates
+
+For comprehensive product development with advanced features, use:
+- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent collaboration, quality gates, mobile-first enforcement
+
+**Choose prototype-starter when:**
+- Quick prototyping and experimentation
+- Solo development or small teams
+- Don't need multi-agent orchestration
+- Want minimal configuration
+
+**Choose product-workspace when:**
+- Building production applications
+- Need multi-perspective feedback on decisions (Engineer, Designer, PM)
+- Want strict quality enforcement with flexible prototype mode
+- Working in teams with multiple roles
 
 ## Resources
 
