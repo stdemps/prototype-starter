@@ -1,0 +1,15 @@
+{
+  "skills": {
+    "engineer": {
+      "path": "./agents/engineer.js",
+      "description": "💬 Ask technical questions, debug issues, discuss architecture"
+    },
+    "designer": {
+      "path": "./agents/designer.js",
+      "description": "💬 Ask UX questions, get design guidance, accessibility advice"
+    }
+  },
+  "hooks": {
+    "pre-commit": "./hooks/quality-gate.sh"
+  }
+}

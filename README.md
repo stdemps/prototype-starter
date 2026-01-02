@@ -7,6 +7,8 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 ## Features
 
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
+- **Quick AI guidance:** Built-in `/engineer` and `/designer` agents for instant technical and UX advice
+- **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
 - **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
 - **Documentation structure:** PRD templates, reviewer personas ready to use
 - **Dark mode:** Fully configured and working out of the box
@@ -60,6 +62,13 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 ```
 workspace-template/
+├── .claude/
+│   ├── agents/             # AI agents for quick guidance
+│   │   ├── engineer.js     # Technical questions
+│   │   └── designer.js     # UX questions
+│   ├── hooks/              # Git hooks
+│   │   └── quality-gate.sh # Lenient pre-commit checks
+│   └── claude.json         # Claude Code configuration
 ├── .cursor/
 │   └── rules/              # Auto-loaded context (available via @ mentions)
 │       ├── ui-design-guidelines.mdc
@@ -97,6 +106,44 @@ Files in `.cursor/rules/` are automatically loaded by Cursor and available via @
 ```
 @ui-design-guidelines How should I make this component mobile-responsive?
 ```
+
+## Quick AI Guidance
+
+Get instant help from built-in agents:
+
+**Engineer Agent** - Technical questions and architecture guidance:
+```bash
+/engineer "How should I structure authentication for this Next.js app?"
+/engineer "What's the best way to handle server-side data fetching?"
+/engineer "Should I use React Query or SWR for this use case?"
+```
+
+**Designer Agent** - UX and accessibility guidance:
+```bash
+/designer "How should loading states work in this form?"
+/designer "What's the best mobile navigation pattern for this app?"
+/designer "How do I make this component accessible?"
+```
+
+These agents provide quick, context-aware advice without leaving your workflow.
+
+## Lenient Quality Checks
+
+Pre-commit hooks run quality checks but **never block commits** - perfect for prototyping:
+
+```bash
+# Runs checks, shows warnings, but always allows commit
+git commit -m "WIP: Experimenting with new feature"
+
+# Skip checks entirely if needed
+SKIP_QUALITY_GATE=1 git commit -m "Quick fix"
+```
+
+**What it checks:**
+- ESLint code quality
+- TypeScript type errors
+
+**Philosophy:** See issues, stay aware, but keep moving fast.
 
 ## Documentation Templates
 
@@ -150,23 +197,25 @@ npx shadcn@latest add [component-name]
 This repository (**prototype-starter**) is designed for rapid prototyping with:
 - Minimal setup and configuration
 - Fast onboarding (< 5 minutes)
-- Zero opinions on development workflow
+- Basic AI agents (Engineer, Designer) for quick guidance
+- Lenient quality checks that never block commits
 - Simple Cursor rules and documentation templates
 
 For comprehensive product development with advanced features, use:
-- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent collaboration, quality gates, mobile-first enforcement
+- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent collaboration (adds PM agent + `/collab` orchestration), strict quality gates with prototype mode, mobile-first enforcement
 
 **Choose prototype-starter when:**
 - Quick prototyping and experimentation
 - Solo development or small teams
-- Don't need multi-agent orchestration
-- Want minimal configuration
+- Want helpful guidance without workflow interruption
+- Need quality awareness without enforcement
 
 **Choose product-workspace when:**
 - Building production applications
-- Need multi-perspective feedback on decisions (Engineer, Designer, PM)
+- Need multi-perspective feedback synthesis (Engineer + Designer + PM)
 - Want strict quality enforcement with flexible prototype mode
 - Working in teams with multiple roles
+- Need mobile-first pattern validation
 
 ## Resources
 
