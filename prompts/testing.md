@@ -252,3 +252,108 @@ Please identify and fix the issue.
 **Expected Output:**
 Fixed tests with explanation of the issue and solution
 
+---
+
+## TDD Workflow with Optional UI Verification
+
+**Category:** Testing
+
+**When to use:** When implementing new features with test-driven development approach
+
+**Context needed:** Feature requirements and testing framework preference
+
+---
+
+## Prompt
+
+```
+Implement [FEATURE_NAME] using Test-Driven Development (TDD) workflow.
+
+**TDD Steps:**
+1. **Write tests first** - Create tests that define expected behavior before writing code
+2. **Run tests (expect failures)** - Verify tests fail initially (red phase)
+3. **Write minimal code** - Implement just enough code to pass tests (green phase)
+4. **Refactor** - Improve code quality while keeping tests green
+5. **Repeat** - Continue cycle for each feature increment
+
+**Feature requirements:**
+[Describe the feature functionality, expected behavior, and acceptance criteria]
+
+**Testing framework:**
+[Specify: React Testing Library, Playwright, Cypress, Jest, Vitest, or "any"]
+
+**Optional - UI Verification (if implementing UI features):**
+- Generate screenshots during tests to verify visual correctness
+- Review screenshots for: accessibility, responsive design, component styling
+- Fix any UI issues and regenerate screenshots until correct
+
+**Workspace standards to follow:**
+- Accessibility: WCAG 2.1 AA compliance
+- Responsive: Mobile-first design (test at 375px, 768px, 1024px)
+- TypeScript: Maintain type safety
+- Component library: Use shadcn/ui components if applicable
+```
+
+## Example Usage
+
+**Input:**
+```
+Implement a "Task Card" component with delete functionality using TDD workflow.
+
+**TDD Steps:**
+1. Write tests first
+2. Run tests (expect failures)
+3. Write minimal code
+4. Refactor
+5. Repeat
+
+**Feature requirements:**
+- Display task title, description, and status
+- Show delete button that calls onDelete callback
+- Use Card component from shadcn/ui
+- Accessible with keyboard navigation (Enter/Space to delete)
+- Responsive design (mobile-first)
+
+**Testing framework:**
+React Testing Library
+
+**Optional - UI Verification:**
+- Generate screenshots showing:
+  - Default task card appearance
+  - Hover state on delete button
+  - Mobile view (375px width)
+  - Tablet view (768px width)
+- Review for accessibility contrast ratios
+- Verify button alignment and spacing
+```
+
+**Expected Output:**
+1. Test file with comprehensive test cases (failing initially)
+2. Component implementation that passes all tests
+3. Refactored code with improved quality
+4. (Optional) Screenshots showing correct UI rendering
+
+## Usage Notes
+
+**Benefits:**
+- Ensures feature meets specifications before implementation
+- Reduces bugs by defining expected behavior upfront
+- Provides documentation through tests
+- Encourages simple, focused implementations
+
+**When to skip TDD:**
+- Quick prototypes or throwaway code
+- Exploratory coding to understand problem space
+- Simple UI tweaks with obvious correctness
+
+**Framework-agnostic:**
+- This prompt works with any testing framework
+- Adapt to your project's testing setup
+- No infrastructure required to start - add testing tools when ready
+
+**UI Verification is optional:**
+- Include screenshot verification if visual correctness is critical
+- Skip for backend/API features or quick prototypes
+- Use your judgment based on feature complexity
+
+---

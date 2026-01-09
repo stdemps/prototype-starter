@@ -217,6 +217,50 @@ For comprehensive product development with advanced features, use:
 - Working in teams with multiple roles
 - Need mobile-first pattern validation
 
+## Advanced Testing & Autonomous Workflows
+
+### Testing Infrastructure
+
+This template starts with **zero testing infrastructure** by design - add testing tools when you need them:
+
+**Recommended testing frameworks:**
+- **React Testing Library** - Component testing
+- **Playwright** - End-to-end testing with screenshot capabilities
+- **Vitest** - Fast unit testing for modern projects
+- **Cypress** - Alternative e2e testing with great DX
+
+**Testing guidance included:**
+- [Testing Prompts](./prompts/testing.md) - Comprehensive testing patterns and TDD workflow
+- Framework-agnostic approach - use any testing tool you prefer
+- Optional UI verification with screenshots for visual correctness
+
+### Ralph Loop for Autonomous Development
+
+**[Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)** is a Claude Code plugin that enables autonomous, multi-hour development workflows with self-correction.
+
+**Perfect for prototyping:**
+- ✅ Autonomous feature implementation while you do other work
+- ✅ Self-correcting loops that fix errors until tests pass
+- ✅ Objective completion criteria (tests, builds, linters)
+- ✅ Cost-effective for rapid iteration ($1-25 depending on complexity)
+
+**Quick start:**
+```bash
+# Install Ralph Loop plugin
+/plugin install ralph-wiggum@claude-plugins-official
+
+# Example: Fix all linter errors autonomously
+/ralph-loop "Fix all ESLint errors. Exit when: npm run lint shows 0 problems" --max-iterations 15
+```
+
+**Learn more:**
+- [Ralph Loop Guide](./docs/ralph-loop-guide.md) - Complete guide with prototyping patterns
+- Always use `--max-iterations` for cost control
+- Best for tasks with objective success criteria (tests, builds, linters)
+
+**For production-grade autonomous workflows:**
+[product-workspace](https://github.com/stdemps/product-workspace) includes pre-configured testing infrastructure and Ralph Loop patterns built-in.
+
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
