@@ -84,10 +84,24 @@ Generate a PRD following the project template at \`docs/prds/template-prd.md\`.
 
 ## Process
 
-1. **Read the input carefully**
-2. **Make reasonable assumptions** (label them)
-3. **Generate the complete PRD** filling all 8 sections
-4. **Keep it tight**—a builder should be able to read this in 5 minutes
+1. **Read the PRD template** at \`docs/prds/template-prd.md\` to understand the expected structure
+2. **Read the input carefully**
+3. **Make reasonable assumptions** (label them)
+4. **Generate the complete PRD** filling all 8 sections matching the template structure
+5. **Validate against template** - Ensure all required sections are present
+6. **Keep it tight**—a builder should be able to read this in 5 minutes
+
+## Template Validation
+
+Before finalizing the PRD, verify it includes:
+- ✅ Section 1: What are we building? (clear description)
+- ✅ Section 2: Why are we building it? (problem statement + pain points)
+- ✅ Section 3: Who are we building it for? (primary user definition)
+- ✅ Section 4: How will we measure success? (demo success criteria)
+- ✅ Section 5: What are the key requirements? (must-haves + core flow)
+- ✅ Section 6: What are the risks and unknowns? (honest assessment)
+- ✅ Section 7: What's the timeline? (simple phases)
+- ✅ Section 8: Open Questions (remaining ambiguities)
 
 ## Rules
 
@@ -102,6 +116,119 @@ Generate a PRD following the project template at \`docs/prds/template-prd.md\`.
 Generate the PRD as a markdown document ready to save to \`docs/prds/\`.
 Use the exact section structure from the template.
 Fill in realistic content—no placeholder brackets like "[Insert here]".
+
+## Example Output
+
+For input: "An app that helps users track their daily water intake"
+
+\`\`\`markdown
+# PRD: Daily Water Tracker
+
+## 1. What are we building?
+
+A simple mobile-first web app that helps users track daily water intake. Users log each glass/bottle of water consumed, see progress toward a daily goal, and receive gentle reminders. Core functionality: quick log entry, visual progress indicator, configurable daily goal.
+
+[Assumption: Mobile-first web app (not native), single-user (no sharing), manual logging only]
+
+## 2. Why are we building it?
+
+Many people struggle to drink enough water because they lose track throughout the day, resulting in dehydration and reduced focus.
+
+**Key Pain Points:**
+- Hard to remember how much water consumed without tracking
+- No simple way to check progress toward daily goal
+- Existing apps are overcomplicated or require accounts
+
+**Business Impact:**
+- Demonstrate simple habit-tracking UX patterns
+- Showcase clean mobile-first design
+- Validate "quick log" interaction pattern
+
+## 3. Who are we building it for?
+
+**Primary User:** Health-conscious individual (likely 25-45) who wants to stay hydrated but forgets throughout the day. Uses smartphone regularly. Wants zero friction—no accounts, no setup complexity.
+
+## 4. How will we measure success?
+
+**Demo Success Criteria:**
+- User can log a glass of water in < 3 seconds
+- Progress indicator clearly shows "X / Y glasses today"
+- Daily goal is configurable (defaults to 8 glasses)
+- Reminders appear at reasonable intervals (if implemented)
+
+**Failure Indicators:**
+- Takes > 5 seconds to log entry
+- Progress is confusing or unclear
+- Data doesn't persist between sessions
+
+## 5. What are the key requirements?
+
+**Must-Have (MVP):**
+- Tap/click to add one glass
+- Visual progress bar/circle showing current / goal
+- Configurable daily goal (settings or inline edit)
+- Persist data in browser (localStorage)
+- Reset at midnight (new day)
+
+**Core User Flow:**
+1. User opens app (sees today's progress)
+2. Taps "Add Glass" button
+3. Counter increments, progress bar updates
+4. When goal reached, shows celebration state
+5. Can adjust goal via settings
+
+**Entry Points:**
+- App opens to today's view (no onboarding needed)
+- Large, obvious "Add Glass" button
+
+**Error Handling:**
+- If localStorage fails: Show error, continue with session-only data
+- Invalid goal input: Default to 8, show validation message
+
+**Nice-to-Have:**
+- Gentle reminders/notifications
+- Weekly summary view
+- History/charts
+- Multiple reminder times
+
+## 6. What are the risks and unknowns?
+
+**Technical Risks:**
+- localStorage quota limits (if storing long history)
+- How to resolve: Limit history to last 30 days, add cleanup
+
+**UX Risks:**
+- Users might forget to log (defeats purpose)
+- How to resolve: Add reminders, make logging extremely fast
+
+**Unknowns:**
+- Should reminders be push notifications or in-app?
+- How to resolve: Start with in-app only, test push later
+
+## 7. What's the timeline?
+
+**Phase 1: Build (Week 1)**
+- Core logging + progress indicator
+- LocalStorage persistence
+- Goal configuration
+
+**Phase 2: Test (Days 5-7)**
+- Usability test: Can someone log 8 glasses in < 30 seconds?
+- Fix friction points
+
+**Phase 3: Polish (Days 8-10)**
+- Celebration states
+- Responsive design refinement
+- Error handling
+
+**Dependencies:** None—standalone feature
+
+## 8. Open Questions
+
+- Should we include hydration reminders, or is logging enough?
+- Do users want to see historical trends, or just today?
+- Should "glass" be customizable (bottle, ml, oz)?
+\`\`\`
 `;
 
 async function main() {

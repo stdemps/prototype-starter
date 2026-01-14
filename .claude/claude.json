@@ -7,6 +7,22 @@
     "designer": {
       "path": "./agents/designer.js",
       "description": "💬 Ask UX questions, get design guidance, accessibility advice"
+    },
+    "prd-generator": {
+      "path": "./agents/prd-generator.js",
+      "description": "📝 Convert rough MVP ideas into structured PRDs"
+    },
+    "prd-clarifier": {
+      "path": "./agents/prd-clarifier.js",
+      "description": "🔍 Refine PRDs through structured Q&A sessions"
+    },
+    "prd-to-ux": {
+      "path": "./agents/prd-to-ux.js",
+      "description": "🎨 Translate PRDs into UX specs (6 designer passes)"
+    },
+    "ux-to-prompts": {
+      "path": "./agents/ux-to-prompts.js",
+      "description": "🔨 Transform UX specs into build-order prompts"
     }
   },
   "hooks": {

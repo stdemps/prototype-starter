@@ -51,6 +51,19 @@ const config = {
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			// TalentSourcer semantic colors
+  			success: {
+  				DEFAULT: 'hsl(var(--success))',
+  				foreground: 'hsl(var(--success-foreground))'
+  			},
+  			warning: {
+  				DEFAULT: 'hsl(var(--warning))',
+  				foreground: 'hsl(var(--warning-foreground))'
+  			},
+  			info: {
+  				DEFAULT: 'hsl(var(--info))',
+  				foreground: 'hsl(var(--info-foreground))'
   			}
   		},
   		borderRadius: {
@@ -74,11 +87,36 @@ const config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'shimmer': {
+  				'0%': { transform: 'translateX(-100%)' },
+  				'100%': { transform: 'translateX(100%)' }
+  			},
+  			'fade-in': {
+  				'0%': { opacity: '0' },
+  				'100%': { opacity: '1' }
+  			},
+  			'slide-up': {
+  				'0%': { opacity: '0', transform: 'translateY(10px)' },
+  				'100%': { opacity: '1', transform: 'translateY(0)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'shimmer': 'shimmer 1.5s infinite',
+  			'fade-in': 'fade-in 0.2s ease-out',
+  			'slide-up': 'slide-up 0.3s ease-out'
+  		},
+  		// TalentSourcer layout tokens
+  		spacing: {
+  			'header': 'var(--header-height)',
+  			'sidebar': 'var(--sidebar-width)',
+  			'sidebar-collapsed': 'var(--sidebar-width-collapsed)'
+  		},
+  		boxShadow: {
+  			'xs': 'var(--shadow-xs)',
+  			'elevated': 'var(--shadow-elevated)'
   		}
   	}
   },

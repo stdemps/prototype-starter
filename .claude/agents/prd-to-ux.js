@@ -17,6 +17,21 @@ Translate product requirements into UX foundations through **6 forced designer m
 
 **Core principle:** UX foundations come BEFORE visual specifications. Mental models, information architecture, and cognitive load analysis prevent "pretty but unusable" designs.
 
+## Input Validation
+
+Before starting, verify the PRD structure:
+- ✅ Read the PRD and confirm it follows \`docs/prds/template-prd.md\` structure
+- ✅ Ensure Section 5 (Key Requirements) has clear user flows
+- ✅ Note any ambiguities—these will inform your UX decisions
+- If PRD is missing critical sections, flag this before proceeding
+
+## Cross-Agent Validation
+
+**Check for related artifacts:**
+- If a clarification session exists (\`{prd-name}-clarification-session.md\`): Review resolved questions—these provide additional context
+- If a UX spec already exists: Ask user if they want to update or create a new version
+- These can inform your UX decisions and reduce ambiguity
+
 ## Output Location
 
 **Write the UX specification to a file in the same directory as the source PRD.**
@@ -262,6 +277,133 @@ Only after all 6 passes are complete, create:
 
 ## Visual Specifications
 [Only after passes complete]
+\`\`\`
+
+## Example Pass Outputs
+
+### Example: Water Tracker App
+
+**Pass 1 Output:**
+\`\`\`markdown
+## Pass 1: Mental Model
+
+**Primary user intent:** "I want to quickly log that I drank water and see if I'm on track for the day."
+
+**Likely misconceptions:**
+- User might think they need to specify volume/type (bottle vs glass)
+- User might expect automatic tracking via sensors
+- User might think "goal" is fixed and can't change
+
+**UX principle to reinforce/correct:** Make logging feel like a single action (one tap = one glass). Explicitly show goal is customizable to correct "fixed goal" misconception.
+\`\`\`
+
+**Pass 2 Output:**
+\`\`\`markdown
+## Pass 2: Information Architecture
+
+**All user-visible concepts:**
+- Today's progress (glasses consumed)
+- Daily goal (target glasses)
+- Add Glass button (action)
+- Settings/Goal configuration
+- Time of day
+- Celebration state (when goal reached)
+
+**Grouped structure:**
+
+### Primary View (Home Screen)
+- Progress indicator: Primary (always visible)
+- Goal: Primary (always visible)
+- Add Glass button: Primary (always accessible)
+- Time: Secondary (small, contextual)
+
+### Settings
+- Goal configuration: Hidden (accessed via icon/gear)
+- Reset data: Hidden (progressive disclosure, if needed)
+
+**Rationale:** Primary view keeps user focused on core task (log + see progress). Settings hidden to reduce cognitive load.
+\`\`\`
+
+**Pass 3 Output:**
+\`\`\`markdown
+## Pass 3: Affordances
+
+| Action | Visual/Interaction Signal |
+|--------|---------------------------|
+| Log a glass | Large, prominent button with "+" or "Add Glass" text, high contrast |
+| View progress | Circular progress bar or horizontal bar, color-coded (green = good, yellow = halfway) |
+| Adjust goal | Gear icon or "Settings" link (small, but discoverable), opens modal |
+| See celebration | Full-screen overlay or prominent banner (different from normal state) |
+
+**Affordance rules:**
+- If user sees large button in center, they should assume "tap to log"
+- If user sees progress < 50%, they should understand "need to drink more"
+- If user sees gear icon, they should assume "settings/configuration"
+- If progress = 100%, user should immediately understand "goal achieved"
+\`\`\`
+
+**Pass 4 Output:**
+\`\`\`markdown
+## Pass 4: Cognitive Load
+
+**Friction points:**
+
+| Moment | Type | Simplification |
+|--------|------|----------------|
+| Opening app | Uncertainty | Show progress immediately (no loading delay) |
+| Logging glass | Choice | Single button, no "amount" or "type" choice |
+| Setting goal | Choice | Default to 8, show current value, simple number input |
+| Checking if on track | Uncertainty | Color-code progress (green/yellow/red) |
+
+**Defaults introduced:**
+- Default goal: 8 glasses (most common recommendation)
+- Default glass size: Standard (no need to specify)
+- Reset time: Midnight (no user configuration needed)
+\`\`\`
+
+**Pass 5 Output:**
+\`\`\`markdown
+## Pass 5: State Design
+
+### Progress Indicator
+
+| State | User Sees | User Understands | User Can Do |
+|-------|-----------|------------------|-------------|
+| Empty (0/8) | Empty circle/bar, "0 / 8" | Just started | Tap to add glass |
+| Partial (3/8) | 37.5% filled, yellow/green color | Making progress | Continue logging |
+| Near Goal (7/8) | 87.5% filled, green color | Almost there | One more glass! |
+| Complete (8/8) | 100% filled, celebration UI | Goal achieved | Celebrate, continue logging |
+
+### Add Button
+
+| State | User Sees | User Understands | User Can Do |
+|-------|-----------|------------------|-------------|
+| Default | Large button, "+" icon | Tap to log | Tap to add |
+| Tapped | Brief animation, counter updates | Action registered | Continue using |
+| Error | Red state, error message | Something went wrong | Retry or check settings |
+\`\`\`
+
+**Pass 6 Output:**
+\`\`\`markdown
+## Pass 6: Flow Integrity
+
+**Flow risks:**
+
+| Risk | Where | Mitigation |
+|------|-------|------------|
+| User forgets to log | Throughout day | Optional reminders (nice-to-have) |
+| User unsure if logged | After tapping | Immediate visual feedback (counter animates up) |
+| Goal seems too high | First use | Default to 8 (standard), easy to change |
+| Data loss fear | First use | Show "data saved" indicator or explain localStorage |
+
+**Visibility decisions:**
+- Must be visible: Current progress, goal, Add button
+- Can be implied: Time of day (if not critical), history (can be hidden initially)
+
+**UX constraints:**
+- Add button must be thumb-reachable on mobile
+- Progress must update immediately on tap (no loading state)
+- Celebration state must not block continued logging
 \`\`\`
 `;
 

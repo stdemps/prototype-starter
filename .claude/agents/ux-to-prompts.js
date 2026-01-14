@@ -71,9 +71,19 @@ Each generated prompt follows this structure:
 
 ## Extraction Process
 
-### Step 1: Identify Atomic Units
+### Step 1: Validate Input & Identify Atomic Units
 
-Read through the spec and list discrete buildable features:
+**First, validate the UX spec structure:**
+- ✅ Confirm it has all 6 passes (Mental Model, IA, Affordances, Cognitive Load, States, Flow Integrity)
+- ✅ Verify visual specifications exist (if missing, flag this before proceeding)
+- ✅ Check that measurements and states are clearly defined
+
+**Cross-check with source PRD:**
+- ✅ Verify UX spec aligns with PRD requirements (check if source PRD exists)
+- ✅ If PRD was clarified (\`{name}-clarification-session.md\` exists), ensure UX addresses resolved questions
+- ✅ Flag any UX decisions that deviate from PRD—may need PRD update
+
+**Then, read through the spec and list discrete buildable features:**
 - Each screen/view
 - Each reusable component
 - Each interaction pattern
@@ -203,6 +213,166 @@ Before finalizing prompts:
 | Missing states | Cross-reference spec's state design section |
 | Vague measurements ("good spacing") | Use exact values from spec |
 | Wrong build order | Check dependency graph |
+
+## Example Build-Order Prompts Document
+
+For a Water Tracker app UX spec, output would look like:
+
+\`\`\`markdown
+# Build-Order Prompts: Water Tracker
+
+## Overview
+A mobile-first web app for tracking daily water intake with quick logging, visual progress indicators, and configurable daily goals.
+
+## Build Sequence
+1. Foundation - Design tokens and base types
+2. Layout Shell - Main app container and navigation
+3. Progress Indicator Component - Circular/linear progress display
+4. Add Button Component - Primary logging action
+5. Settings Modal - Goal configuration
+6. State Management - Progress tracking and persistence
+7. Celebration State - Goal completion feedback
+8. Responsive Polish - Mobile-first responsive adjustments
+
+---
+
+## Prompt 1: Foundation
+
+### Context
+Establish design tokens (colors, spacing, typography) and TypeScript types for the Water Tracker app. These will be used by all subsequent components.
+
+### Requirements
+- Color tokens:
+  - Primary: Deep blue (#1e40af) for progress fill
+  - Success: Green (#10b981) for goal completion
+  - Background: Light gray (#f9fafb)
+  - Text: Dark gray (#111827)
+  - Muted: Medium gray (#6b7280)
+- Spacing scale: 4px base unit (4, 8, 12, 16, 24, 32, 48)
+- Typography: System font stack, 16px base, weights: 400 (normal), 600 (semibold), 700 (bold)
+- Border radius: 8px standard, 12px for buttons, 999px for circles
+
+### Types to Define
+\`\`\`typescript
+type DailyProgress = {
+  glasses: number;
+  goal: number;
+  date: string; // ISO date
+};
+
+type AppState = {
+  today: DailyProgress;
+  history: DailyProgress[];
+};
+\`\`\`
+
+### Constraints
+- Use CSS variables for tokens (enable theming later)
+- Types should support localStorage serialization
+- No component styling yet—just tokens and types
+
+---
+
+## Prompt 2: Progress Indicator Component
+
+### Context
+A circular or linear progress indicator showing "X / Y glasses today". Part of the primary home screen view. Users need to instantly understand their progress status.
+
+### Requirements
+- Display format: "5 / 8" with visual fill (circle or bar)
+- Dimensions: Full width on mobile (minus padding), max-width 300px on desktop
+- Visual fill: Color-coded by progress:
+  - 0-50%: Yellow/amber (#f59e0b)
+  - 50-99%: Light green (#34d399)
+  - 100%: Success green (#10b981)
+- Typography: Large, readable numbers (min 24px), "glasses" label in smaller text (14px)
+- Animation: Smooth fill animation when progress updates (200ms transition)
+
+### States
+- Default: Shows current progress
+- Updating: Smooth transition animation when value changes
+- Complete: Full fill + different styling (see Prompt 7 for celebration)
+
+### Interactions
+- None—display only
+- Updates reactively when progress changes
+
+### Constraints
+- Component only—not the full screen layout
+- Must be accessible (ARIA labels for screen readers)
+- Should work in both light and dark mode (if supported)
+
+---
+
+## Prompt 3: Add Button Component
+
+### Context
+The primary action button for logging a glass of water. Must be immediately obvious, thumb-reachable on mobile, and provide instant feedback.
+
+### Requirements
+- Size: Minimum 56x56px touch target (mobile-first)
+- Placement: Centered, prominent (home screen)
+- Styling: Primary color background, white text/icon, rounded (12px border-radius)
+- Icon: Plus (+) symbol, size 24px
+- Text: Optional "Add Glass" label below icon (or just icon)
+- Spacing: 24px margin from other elements
+
+### States
+- Default: Primary color, elevated (subtle shadow)
+- Hover: Slightly darker, shadow increases
+- Active/Tapped: Scales down to 0.95, immediate feedback
+- Success: Brief checkmark animation, then returns to default
+
+### Interactions
+- Tap/Click: Increments glass count, triggers success animation
+- Keyboard: Accessible via Enter/Space (if focused)
+- Feedback: Immediate visual response (no loading state)
+
+### Constraints
+- No drag-and-drop functionality
+- No confirmation dialog (trust user intent)
+- Animation should be < 300ms (feels instant)
+
+---
+
+## Prompt 4: Settings Modal
+
+### Context
+A modal/drawer for configuring the daily goal. Hidden by default, accessed via gear icon or "Settings" link. Allows users to set custom daily goal.
+
+### Requirements
+- Trigger: Gear icon (20x20px) in top-right corner or header
+- Modal type: Bottom sheet on mobile (slides up), centered modal on desktop
+- Content:
+  - Title: "Daily Goal"
+  - Input field: Number input, current goal pre-filled
+  - Hint text: "Recommended: 8 glasses"
+  - Save button: Primary action
+  - Cancel/Close: Secondary action or X button
+- Input validation: Minimum 1, maximum 20 (reasonable bounds)
+
+### States
+- Closed: Not visible
+- Opening: Slide-up animation (mobile) or fade-in (desktop)
+- Open: Visible, input focused
+- Saving: Brief loading state (if async)
+- Saved: Success message, auto-closes after 1s
+
+### Interactions
+- Open: Tap gear icon
+- Close: Tap outside, tap X, tap Cancel, or Escape key
+- Save: Validate input, save to localStorage, close modal
+- Cancel: Discard changes, close modal
+
+### Constraints
+- Modal must trap focus (keyboard navigation)
+- Must work on mobile (bottom sheet pattern)
+- No complex settings—just goal for MVP
+
+---
+
+[Additional prompts for State Management, Celebration State, Responsive Polish...]
+\`\`\`
 `;
 
 async function main() {
