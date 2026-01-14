@@ -7,7 +7,9 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 ## Features
 
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
-- **Quick AI guidance:** Built-in `/engineer` and `/designer` agents for instant technical and UX advice
+- **Two workflow approaches:** PRD-to-code pipeline for structured specs OR direct guidance for quick questions
+- **Quick AI guidance:** Built-in agents (`/engineer`, `/designer`, `/prd-generator`, `/prd-to-ux`, etc.) for instant help
+- **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Build Prompts)
 - **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
 - **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
 - **Documentation structure:** PRD templates, reviewer personas ready to use
@@ -63,9 +65,13 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 ```
 workspace-template/
 ├── .claude/
-│   ├── agents/             # AI agents for quick guidance
+│   ├── agents/             # AI agents and skills
 │   │   ├── engineer.js     # Technical questions
-│   │   └── designer.js     # UX questions
+│   │   ├── designer.js     # UX questions
+│   │   ├── prd-generator.js    # MVP idea → PRD
+│   │   ├── prd-clarifier.js    # PRD refinement Q&A
+│   │   ├── prd-to-ux.js        # PRD → UX spec
+│   │   └── ux-to-prompts.js    # UX spec → build prompts
 │   ├── hooks/              # Git hooks
 │   │   └── quality-gate.sh # Lenient pre-commit checks
 │   └── claude.json         # Claude Code configuration
@@ -109,7 +115,7 @@ Files in `.cursor/rules/` are automatically loaded by Cursor and available via @
 
 ## Quick AI Guidance
 
-Get instant help from built-in agents:
+Get instant help from built-in agents. See [Two Workflow Approaches](#two-workflow-approaches) below for comprehensive workflow guidance.
 
 **Engineer Agent** - Technical questions and architecture guidance:
 ```bash
@@ -126,6 +132,98 @@ Get instant help from built-in agents:
 ```
 
 These agents provide quick, context-aware advice without leaving your workflow.
+
+## Two Workflow Approaches
+
+Prototype Starter supports two complementary workflows for different needs:
+
+### 1. PRD-to-Code Pipeline (Structured, Document-Driven)
+
+For turning ideas into buildable specs through structured documents. Best for new features, larger projects, or when you need documented specifications.
+
+**Workflow:**
+```
+Idea → /prd-generator → PRD
+PRD → /prd-clarifier → Refined PRD (optional)
+PRD → /prd-to-ux → UX Spec
+UX Spec → /ux-to-prompts → Build Prompts
+Build Prompts → /frontend-design → Code
+```
+
+**Skills:**
+- `/prd-generator "your idea"` - Convert rough MVP ideas into structured PRDs
+- `/prd-clarifier docs/prds/feature.md` - Refine PRDs through structured Q&A
+- `/prd-to-ux docs/prds/feature.md` - Translate PRDs into UX specs (6 designer passes)
+- `/ux-to-prompts docs/prds/feature-ux-spec.md` - Transform UX specs into build-order prompts
+
+**When to use:**
+- ✅ Starting a new feature from scratch
+- ✅ Need documented specifications
+- ✅ Building larger, multi-component features
+- ✅ Want build-order prompts for UI generation tools
+- ✅ Working with a team that needs clear specs
+
+**Example:**
+```bash
+# Step 1: Generate PRD from idea
+/prd-generator "A dashboard for tracking daily habits"
+
+# Step 2: Create UX specification (optional clarification first)
+/prd-to-ux docs/prds/daily-habits.md
+
+# Step 3: Generate build prompts
+/ux-to-prompts docs/prds/daily-habits-ux-spec.md
+
+# Step 4: Build using prompts
+/frontend-design [paste prompt from build-prompts file]
+```
+
+### 2. Direct Guidance (Conversational, Ad-Hoc)
+
+For immediate help and quick questions. Best for debugging, spot advice, or making small changes.
+
+**Workflow:**
+```
+Question → /engineer or /designer → Immediate Answer → Action
+```
+
+**Skills:**
+- `/engineer "your question"` - Technical questions, architecture, debugging
+- `/designer "your question"` - UX questions, design guidance, accessibility
+
+**When to use:**
+- ✅ Quick technical/design questions
+- ✅ Debugging existing code
+- ✅ Making a single component or small change
+- ✅ Need immediate spot advice
+- ✅ Interactive problem-solving
+
+**Example:**
+```bash
+# Technical question
+/engineer "How should I structure authentication for this Next.js app?"
+
+# UX question
+/designer "What's the best mobile navigation pattern for a dashboard?"
+
+# Debugging
+/engineer "This API call is failing with CORS errors, how do I fix it?"
+```
+
+### Choosing the Right Workflow
+
+| Situation | Recommended Workflow |
+|-----------|---------------------|
+| New feature, starting from idea | PRD Pipeline |
+| Quick fix or small change | Direct Guidance |
+| Need specs/documentation | PRD Pipeline |
+| Debugging existing code | Direct Guidance |
+| Building complex UI flows | PRD Pipeline |
+| Making a single component | Direct Guidance |
+| Team collaboration | PRD Pipeline |
+| Solo rapid iteration | Either (direct guidance is faster) |
+
+**Note:** These workflows complement each other. You can use direct guidance to get quick help while working through the PRD pipeline, or use the PRD pipeline to document decisions made via direct guidance.
 
 ## Lenient Quality Checks
 
