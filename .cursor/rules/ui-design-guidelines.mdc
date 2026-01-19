@@ -332,8 +332,9 @@ import { CheckCircle2, XCircle, AlertCircle } from "lucide-react"
 ### Color System
 - Use semantic color tokens: `bg-primary`, `text-foreground`, `border-border`
 - Don't use raw color values: `bg-blue-500` → use `bg-primary`
-- Colors defined in `globals.css` CSS variables
+- Colors defined in `globals.css` CSS variables (shadcn/ui theme system)
 - Support both light and dark modes
+- **For brand customization:** Use `@brand-identity` agent or `skills/brand-identity/resources/design-tokens.json` to customize colors, then implement in `globals.css` as CSS variables
 
 ### Spacing
 - Use Tailwind spacing scale: `p-4`, `m-6`, `gap-8`

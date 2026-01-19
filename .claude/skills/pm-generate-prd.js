@@ -36,9 +36,15 @@ You must:
 - Avoid overengineering
 - Optimize for a believable demo, not production scale
 
+## Reference Resources
+
+👉 **Skill:** \`skills/prd-writing/\` - Templates and guidelines
+👉 **Template:** \`skills/prd-writing/resources/template.md\`
+👉 **Guidelines:** \`skills/prd-writing/resources/guidelines.md\`
+
 ## Output Structure
 
-Generate a PRD following the project template at \`docs/prds/template-prd.md\`.
+Generate a PRD following the template structure.
 
 ### Section Guidelines:
 

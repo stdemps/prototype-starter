@@ -1,0 +1,230 @@
+#!/bin/bash
+
+# Sync Script: Copy agent and skill files from prototype-starter to product-workspace
+#
+# This script syncs agent files, Cursor rules, and configuration updates
+# from prototype-starter to product-workspace. Since product-workspace is
+# more elaborate, it may have additional files which will be preserved.
+#
+# Usage: ./sync-to-product-workspace.sh [product-workspace-path]
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SOURCE_DIR="$(dirname "$SCRIPT_DIR")"
+cd "$SOURCE_DIR"
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+echo "🔄 Sync Script: prototype-starter → product-workspace"
+echo "=================================================="
+echo ""
+
+# Determine product-workspace path
+if [ -n "$1" ]; then
+  TARGET_DIR="$1"
+elif [ -d "../product-workspace" ]; then
+  TARGET_DIR="../product-workspace"
+else
+  echo "❌ product-workspace directory not found."
+  echo ""
+  echo "Usage: $0 [product-workspace-path]"
+  echo ""
+  echo "Or place product-workspace in a sibling directory:"
+  echo "  ../product-workspace/"
+  exit 1
+fi
+
+# Resolve absolute path
+TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
+
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "❌ Directory does not exist: $TARGET_DIR"
+  exit 1
+fi
+
+if [ ! -d "$TARGET_DIR/.git" ]; then
+  echo "⚠️  Warning: $TARGET_DIR doesn't appear to be a git repository"
+  read -p "Continue anyway? (y/n) " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+  fi
+fi
+
+echo "📦 Source:      $SOURCE_DIR"
+echo "🎯 Target:      $TARGET_DIR"
+echo ""
+
+# Files to sync
+declare -a AGENT_FILES=(
+  ".claude/agents/executive.js"
+  ".claude/agents/user-researcher.js"
+  ".claude/agents/pm.js"
+)
+
+declare -a CURSOR_RULES=(
+  ".cursor/rules/agents/pm.mdc"
+  ".cursor/rules/agents/pm-generate-prd.mdc"
+  ".cursor/rules/agents/pm-clarify-prd.mdc"
+  ".cursor/rules/agents/designer-prd-to-ux.mdc"
+  ".cursor/rules/agents/ux-to-prompts.mdc"
+  ".cursor/rules/agents/executive.mdc"
+  ".cursor/rules/agents/user-researcher.mdc"
+)
+
+# Track what was synced
+SYNCED_FILES=()
+NEW_FILES=()
+UPDATED_FILES=()
+
+# Function to copy file and track status
+copy_file() {
+  local src="$1"
+  local dest="$2"
+  local rel_path="${src#.claude/}"
+  rel_path="${rel_path#.cursor/}"
+  
+  if [ ! -f "$SOURCE_DIR/$src" ]; then
+    echo "⚠️  Source file not found: $src"
+    return 1
+  fi
+  
+  # Create target directory if needed
+  mkdir -p "$(dirname "$TARGET_DIR/$src")"
+  
+  if [ -f "$TARGET_DIR/$src" ]; then
+    # File exists, check if different
+    if ! cmp -s "$SOURCE_DIR/$src" "$TARGET_DIR/$src"; then
+      cp "$SOURCE_DIR/$src" "$TARGET_DIR/$src"
+      UPDATED_FILES+=("$src")
+      echo "  ✅ Updated:   $src"
+    else
+      echo "  ⏭️  Unchanged: $src"
+    fi
+  else
+    # New file
+    cp "$SOURCE_DIR/$src" "$TARGET_DIR/$src"
+    NEW_FILES+=("$src")
+    echo "  ✨ New:       $src"
+  fi
+  
+  SYNCED_FILES+=("$src")
+}
+
+# Sync agent files
+echo "📁 Syncing Claude agents..."
+for file in "${AGENT_FILES[@]}"; do
+  copy_file "$file" "$TARGET_DIR/$file"
+done
+
+# Make agent files executable
+echo ""
+echo "🔧 Making agent files executable..."
+for file in "${AGENT_FILES[@]}"; do
+  if [ -f "$TARGET_DIR/$file" ]; then
+    chmod +x "$TARGET_DIR/$file"
+  fi
+done
+
+# Sync Cursor rules
+echo ""
+echo "📁 Syncing Cursor rules..."
+for file in "${CURSOR_RULES[@]}"; do
+  copy_file "$file" "$TARGET_DIR/$file"
+done
+
+# Handle claude.json merge
+echo ""
+echo "⚙️  Merging claude.json..."
+
+if [ ! -f "$TARGET_DIR/.claude/claude.json" ]; then
+  echo "  ⚠️  Target claude.json not found, copying..."
+  mkdir -p "$TARGET_DIR/.claude"
+  cp "$SOURCE_DIR/.claude/claude.json" "$TARGET_DIR/.claude/claude.json"
+  UPDATED_FILES+=(".claude/claude.json")
+else
+  # Merge strategy: add missing entries from source, preserve existing ones
+  echo "  🔀 Merging configuration..."
+  
+  # Create temp files for merging
+  TEMP_SOURCE=$(mktemp)
+  TEMP_TARGET=$(mktemp)
+  TEMP_MERGED=$(mktemp)
+  
+  # Extract skills section from both files
+  jq '.skills' "$SOURCE_DIR/.claude/claude.json" > "$TEMP_SOURCE"
+  jq '.skills' "$TARGET_DIR/.claude/claude.json" > "$TEMP_TARGET"
+  
+  # Merge: start with target, add/update from source
+  jq -s '.[0] * .[1]' "$TEMP_TARGET" "$TEMP_SOURCE" > "$TEMP_MERGED"
+  
+  # Reconstruct full JSON with merged skills
+  jq --argjson skills "$(cat "$TEMP_MERGED")" '.skills = $skills' "$TARGET_DIR/.claude/claude.json" > "$TEMP_TARGET"
+  
+  # Check if merge changed anything
+  if ! cmp -s "$TARGET_DIR/.claude/claude.json" "$TEMP_TARGET"; then
+    cp "$TEMP_TARGET" "$TARGET_DIR/.claude/claude.json"
+    UPDATED_FILES+=(".claude/claude.json")
+    echo "  ✅ Merged:    .claude/claude.json"
+  else
+    echo "  ⏭️  Unchanged: .claude/claude.json (all entries already present)"
+  fi
+  
+  # Cleanup
+  rm -f "$TEMP_SOURCE" "$TEMP_TARGET" "$TEMP_MERGED"
+fi
+
+# Summary
+echo ""
+echo "=================================================="
+echo "📊 Sync Summary"
+echo "=================================================="
+echo ""
+
+if [ ${#NEW_FILES[@]} -gt 0 ]; then
+  echo -e "${GREEN}✨ New files (${#NEW_FILES[@]}):${NC}"
+  for file in "${NEW_FILES[@]}"; do
+    echo "   + $file"
+  done
+  echo ""
+fi
+
+if [ ${#UPDATED_FILES[@]} -gt 0 ]; then
+  echo -e "${BLUE}🔄 Updated files (${#UPDATED_FILES[@]}):${NC}"
+  for file in "${UPDATED_FILES[@]}"; do
+    echo "   ~ $file"
+  done
+  echo ""
+fi
+
+if [ ${#NEW_FILES[@]} -eq 0 ] && [ ${#UPDATED_FILES[@]} -eq 0 ]; then
+  echo -e "${YELLOW}ℹ️  All files are already in sync!${NC}"
+  echo ""
+fi
+
+echo "📁 Total files synced: ${#SYNCED_FILES[@]}"
+echo ""
+
+# Show next steps
+if [ ${#NEW_FILES[@]} -gt 0 ] || [ ${#UPDATED_FILES[@]} -gt 0 ]; then
+  echo "Next steps:"
+  echo "  1. Review changes in product-workspace:"
+  echo "     cd $TARGET_DIR"
+  echo "     git status"
+  echo ""
+  echo "  2. Review diffs:"
+  echo "     git diff"
+  echo ""
+  echo "  3. Commit if satisfied:"
+  echo "     git add ."
+  echo "     git commit -m 'Sync agents and skills from prototype-starter'"
+  echo ""
+fi
+
+echo -e "${GREEN}✅ Sync complete!${NC}"

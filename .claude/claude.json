@@ -1,32 +1,44 @@
 {
   "skills": {
+    "pm": {
+      "path": "./agents/pm.js",
+      "description": "💬 Agent: Product strategy, prioritization, problem framing, scope management"
+    },
     "engineer": {
       "path": "./agents/engineer.js",
-      "description": "💬 Ask technical questions, debug issues, discuss architecture"
+      "description": "💬 Agent: Ask technical questions, debug issues, discuss architecture"
     },
     "designer": {
       "path": "./agents/designer.js",
-      "description": "💬 Ask UX questions, get design guidance, accessibility advice"
+      "description": "💬 Agent: Ask UX questions, get design guidance, accessibility advice"
     },
-    "prd-generator": {
-      "path": "./agents/prd-generator.js",
-      "description": "📝 Convert rough MVP ideas into structured PRDs"
+    "executive": {
+      "path": "./agents/executive.js",
+      "description": "💼 Agent: Strategic reviews, business cases, prioritization, stakeholder alignment"
     },
-    "prd-clarifier": {
-      "path": "./agents/prd-clarifier.js",
-      "description": "🔍 Refine PRDs through structured Q&A sessions"
+    "user-researcher": {
+      "path": "./agents/user-researcher.js",
+      "description": "🔍 Agent: User validation, research planning, Jobs-to-be-Done, insight synthesis"
     },
-    "prd-to-ux": {
-      "path": "./agents/prd-to-ux.js",
-      "description": "🎨 Translate PRDs into UX specs (6 designer passes)"
+    "designer-brand-identity": {
+      "path": "./skills/designer-brand-identity.js",
+      "description": "🎨 Designer Skill: Apply brand tokens, styling, and voice/tone guidelines"
+    },
+    "pm-generate-prd": {
+      "path": "./skills/pm-generate-prd.js",
+      "description": "📝 PM Skill: Convert rough MVP ideas into structured PRDs"
+    },
+    "pm-clarify-prd": {
+      "path": "./skills/pm-clarify-prd.js",
+      "description": "📝 PM Skill: Clarify PRDs through structured questioning"
+    },
+    "designer-prd-to-ux": {
+      "path": "./skills/designer-prd-to-ux.js",
+      "description": "🎨 Designer Skill: Translate PRDs into UX specifications (6-pass framework)"
     },
     "ux-to-prompts": {
-      "path": "./agents/ux-to-prompts.js",
-      "description": "🔨 Transform UX specs into build-order prompts"
-    },
-    "brand-identity": {
-      "path": "./agents/brand-identity.js",
-      "description": "🎨 Ensure brand consistency across UI, styling, and copywriting"
+      "path": "./skills/ux-to-prompts.js",
+      "description": "🔧 Utility: Generate sequenced build prompts for UI tools (v0, Bolt, etc.)"
     }
   },
   "hooks": {

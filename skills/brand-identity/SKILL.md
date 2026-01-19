@@ -1,13 +1,38 @@
 ---
 name: brand-identity
-description: Provides the single source of truth for brand guidelines, design tokens, technology choices, and voice/tone. Use this skill whenever generating UI components, styling applications, writing copy, or creating user-facing assets to ensure brand consistency.
+description: Customize shadcn/ui themes and brand-specific design tokens. Use this skill to personalize your build beyond out-of-the-box shadcn defaults while complementing existing UI patterns.
 ---
 
-# Brand Identity & Guidelines
+# Brand Identity & Theme Customization
 
 **Brand Name:** [INSERT BRAND NAME HERE]
 
-This skill defines the core constraints for visual design and technical implementation for the brand. You must adhere to these guidelines strictly to maintain consistency.
+This skill provides **custom brand-specific values** that customize the shadcn/ui theme system. It complements the existing UI patterns and guidelines—use it to make your build unique while following established patterns.
+
+## Purpose
+
+- **Customize shadcn themes** - Override default shadcn colors, fonts, and spacing
+- **Brand-specific tokens** - Define your unique brand colors, typography, and voice
+- **Complement existing patterns** - Works alongside UI Guidelines, not replaces them
+- **Implementation in globals.css** - Design tokens here should be implemented as CSS variables in `app/globals.css`
+
+## Relationship to Existing Patterns
+
+This skill **complements** (does not replace) the patterns in:
+- `@ui-design-guidelines` - Mobile-first, accessibility, component patterns
+- `@coding-standards` - TypeScript, React, code quality standards
+- shadcn/ui defaults - Base component library patterns
+
+**Use brand-identity for:**
+- Customizing colors away from shadcn defaults
+- Brand-specific typography choices
+- Custom voice and tone for copywriting
+- Brand-specific tech constraints
+
+**Use existing patterns for:**
+- General UI patterns (mobile-first, accessibility)
+- Component usage (shadcn/ui components)
+- Code quality standards
 
 ## Reference Documentation
 

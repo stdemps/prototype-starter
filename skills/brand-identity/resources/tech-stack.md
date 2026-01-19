@@ -1,13 +1,22 @@
-# Preferred Tech Stack & Implementation Rules
+# Brand-Specific Tech Stack & Implementation Rules
 
-When generating code or UI components for this brand, you **MUST** strictly adhere to the following technology choices.
+This document defines **brand-specific customizations** to the tech stack. It complements (does not replace) the general patterns in `@coding-standards` and `@ui-design-guidelines`.
 
-## Core Stack
+## Core Stack (Matches Project Defaults)
 
-* **Framework:** React (TypeScript preferred)
-* **Styling Engine:** Tailwind CSS (Mandatory. Do not use plain CSS or styled-components unless explicitly asked.)
-* **Component Library:** shadcn/ui (Use these primitives as the base for all new components.)
-* **Icons:** Lucide React
+* **Framework:** React (TypeScript) - See `@coding-standards` for general patterns
+* **Styling Engine:** Tailwind CSS - See `@ui-design-guidelines` for usage patterns
+* **Component Library:** shadcn/ui - **Use as base, customize with brand tokens**
+* **Icons:** Lucide React - See `@ui-design-guidelines` for icon usage
+
+## Brand Customization Approach
+
+**This skill customizes shadcn/ui themes**, not replaces the component library. Follow this approach:
+
+1. **Use shadcn/ui components** as the foundation (per `@ui-design-guidelines`)
+2. **Apply brand tokens** from `design-tokens.json` via CSS variables in `globals.css`
+3. **Follow existing patterns** for mobile-first, accessibility, component usage
+4. **Customize only brand-specific values** (colors, fonts, voice/tone)
 
 ## Implementation Guidelines
 
