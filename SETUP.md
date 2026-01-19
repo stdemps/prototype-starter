@@ -25,7 +25,7 @@ Step-by-step instructions to get your workspace up and running.
 **Option B: Clone Directly**
 
 ```bash
-git clone https://github.com/yourusername/workspace-template.git my-project
+git clone https://github.com/yourusername/prototype-starter.git my-project
 cd my-project
 ```
 

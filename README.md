@@ -34,7 +34,7 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/yourusername/workspace-template.git my-project
+   git clone https://github.com/yourusername/prototype-starter.git my-project
    cd my-project
    ```
 
@@ -63,7 +63,7 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 ## Project Structure
 
 ```
-workspace-template/
+prototype-starter/
 ├── .claude/
 │   ├── agents/             # AI agents and skills
 │   │   ├── engineer.js     # Technical questions
@@ -71,7 +71,8 @@ workspace-template/
 │   │   ├── prd-generator.js    # MVP idea → PRD
 │   │   ├── prd-clarifier.js    # PRD refinement Q&A
 │   │   ├── prd-to-ux.js        # PRD → UX spec
-│   │   └── ux-to-prompts.js    # UX spec → build prompts
+│   │   ├── ux-to-prompts.js    # UX spec → build prompts
+│   │   └── brand-identity.js   # Brand consistency (colors, voice, tech)
 │   ├── hooks/              # Git hooks
 │   │   └── quality-gate.sh # Lenient pre-commit checks
 │   └── claude.json         # Claude Code configuration
@@ -79,7 +80,20 @@ workspace-template/
 │   └── rules/              # Auto-loaded context (available via @ mentions)
 │       ├── ui-design-guidelines.mdc
 │       ├── coding-standards.mdc
-│       └── project-context.mdc
+│       ├── project-context.mdc
+│       └── agents/         # Agent-specific rules
+│           ├── brand-identity.mdc
+│           ├── designer.mdc
+│           ├── engineer.mdc
+│           ├── executive.mdc
+│           └── user-researcher.mdc
+├── skills/                # Brand identity skill (customizable)
+│   └── brand-identity/
+│       ├── SKILL.md
+│       └── resources/
+│           ├── design-tokens.json
+│           ├── tech-stack.md
+│           └── voice-tone.md
 ├── .github/
 │   └── repository-template/  # GitHub template configuration
 ├── docs/
@@ -129,6 +143,13 @@ Get instant help from built-in agents. See [Two Workflow Approaches](#two-workfl
 /designer "How should loading states work in this form?"
 /designer "What's the best mobile navigation pattern for this app?"
 /designer "How do I make this component accessible?"
+```
+
+**Brand Identity Agent** - Brand consistency across UI, styling, and copy:
+```bash
+/brand-identity "What colors should I use for the primary button?"
+/brand-identity "Generate a login form component following brand guidelines"
+/brand-identity "Write error messages for form validation"
 ```
 
 These agents provide quick, context-aware advice without leaving your workflow.

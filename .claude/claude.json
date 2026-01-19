@@ -23,6 +23,10 @@
     "ux-to-prompts": {
       "path": "./agents/ux-to-prompts.js",
       "description": "🔨 Transform UX specs into build-order prompts"
+    },
+    "brand-identity": {
+      "path": "./agents/brand-identity.js",
+      "description": "🎨 Ensure brand consistency across UI, styling, and copywriting"
     }
   },
   "hooks": {
