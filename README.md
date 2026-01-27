@@ -9,7 +9,7 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
 - **Two workflow approaches:** PRD-to-code pipeline for structured specs OR direct guidance for quick questions
 - **Quick AI guidance:** Built-in agents (`/engineer`, `/designer`, `/prd-generator`, `/prd-to-ux`, etc.) for instant help
-- **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Build Prompts)
+- **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Implementation Plan)
 - **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
 - **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
 - **Documentation structure:** PRD templates, reviewer personas ready to use
@@ -71,7 +71,7 @@ prototype-starter/
 │   │   ├── prd-generator.js    # MVP idea → PRD
 │   │   ├── prd-clarifier.js    # PRD refinement Q&A
 │   │   ├── prd-to-ux.js        # PRD → UX spec
-│   │   ├── ux-to-prompts.js    # UX spec → build prompts
+│   │   ├── ux-to-prompts.js    # UX spec → implementation plan
 │   │   └── brand-identity.js   # Brand consistency (colors, voice, tech)
 │   ├── hooks/              # Git hooks
 │   │   └── quality-gate.sh # Lenient pre-commit checks
@@ -167,21 +167,21 @@ For turning ideas into buildable specs through structured documents. Best for ne
 Idea → /prd-generator → PRD
 PRD → /prd-clarifier → Refined PRD (optional)
 PRD → /prd-to-ux → UX Spec
-UX Spec → /ux-to-prompts → Build Prompts
-Build Prompts → /frontend-design → Code
+UX Spec → /ux-to-implementation-plan → Implementation Plan
+Implementation Plan → Work through tasks incrementally → Code
 ```
 
 **Skills:**
 - `/prd-generator "your idea"` - Convert rough MVP ideas into structured PRDs
 - `/prd-clarifier docs/prds/feature.md` - Refine PRDs through structured Q&A
 - `/prd-to-ux docs/prds/feature.md` - Translate PRDs into UX specs (6 designer passes)
-- `/ux-to-prompts docs/prds/feature-ux-spec.md` - Transform UX specs into build-order prompts
+- `/ux-to-implementation-plan docs/prds/feature-ux-spec.md` - Transform UX specs into implementation plan with small, context-efficient chunks
 
 **When to use:**
 - ✅ Starting a new feature from scratch
 - ✅ Need documented specifications
 - ✅ Building larger, multi-component features
-- ✅ Want build-order prompts for UI generation tools
+- ✅ Want structured implementation plan with small, manageable tasks
 - ✅ Working with a team that needs clear specs
 
 **Example:**
@@ -192,11 +192,11 @@ Build Prompts → /frontend-design → Code
 # Step 2: Create UX specification (optional clarification first)
 /prd-to-ux docs/prds/daily-habits.md
 
-# Step 3: Generate build prompts
-/ux-to-prompts docs/prds/daily-habits-ux-spec.md
+# Step 3: Generate implementation plan with small, context-efficient chunks
+/ux-to-implementation-plan docs/prds/daily-habits-ux-spec.md
 
-# Step 4: Build using prompts
-/frontend-design [paste prompt from build-prompts file]
+# Step 4: Work through implementation plan tasks incrementally
+# Each task has enough context to implement without the full spec
 ```
 
 ### 2. Direct Guidance (Conversational, Ad-Hoc)
