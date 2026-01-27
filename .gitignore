@@ -37,3 +37,10 @@ firebase-debug.*.log
 *.tsbuildinfo
 next-env.d.ts
 .claude/ab-testing/node_modules/
+
+# MCP configuration (should be global, not in workspace)
+.cursor/mcp-servers.json
+.cursor/mcp.json
+
+# Claude local settings (user-specific)
+.claude/settings.local.json

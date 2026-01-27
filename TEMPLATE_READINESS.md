@@ -21,6 +21,9 @@ This document tracks the readiness of this repository as a GitHub template.
 - [x] All Claude agents registered in `.claude/claude.json`
 - [x] Brand identity skill created for both Claude and Cursor
 - [x] All agent files executable and properly formatted
+- [x] PM, Executive, and User Researcher agents added
+- [x] All Cursor rules created for agents and skills
+- [x] PRD pipeline skills (generate, clarify, prd-to-ux, ux-to-prompts) configured
 
 ### Template Files
 - [x] `.cursor/rules/project-context.mdc` - Template ready (users customize)
@@ -57,11 +60,13 @@ When users create a project from this template, they should customize:
 
 Before making this a GitHub template:
 
-- [ ] Review all documentation for clarity
-- [ ] Test the template.config.js script works
-- [ ] Verify all links in README work
-- [ ] Check that .gitignore is comprehensive
-- [ ] Ensure no personal/sensitive information remains
+- [x] Review all documentation for clarity
+- [x] Test the template.config.js script works
+- [x] Verify all links in README work
+- [x] Check that .gitignore is comprehensive
+- [x] Ensure no personal/sensitive information remains
+- [x] MCP configuration removed from workspace (should be global)
+- [x] Local settings files added to .gitignore
 - [ ] Test cloning and setup process from scratch
 - [ ] Verify all skills work in both Claude and Cursor
 
@@ -73,6 +78,8 @@ These are already in `.gitignore`:
 - `.env*` files
 - `firebase-debug.log`
 - Build artifacts
+- `.claude/settings.local.json` (user-specific Claude settings)
+- `.cursor/mcp-servers.json` and `.cursor/mcp.json` (MCP should be global)
 
 ## 🎯 Template Features
 
@@ -81,11 +88,14 @@ This template includes:
 - ✅ TypeScript strict mode
 - ✅ Tailwind CSS + shadcn/ui
 - ✅ Dark mode support
-- ✅ 6 Claude Code skills (engineer, designer, PRD pipeline)
-- ✅ Cursor rules for auto-loaded context
+- ✅ 5 Claude agents (engineer, designer, pm, executive, user-researcher)
+- ✅ 5 Claude skills (PRD pipeline: generate, clarify, prd-to-ux, ux-to-prompts, brand-identity)
+- ✅ Cursor rules for auto-loaded context (all agents + skills)
 - ✅ PRD templates and documentation structure
 - ✅ Brand identity skill (customizable)
+- ✅ PRD writing skill with templates and guidelines
 - ✅ Lenient quality checks (warn, don't block)
+- ✅ Sync script for product-workspace integration
 
 ## 🚀 Next Steps for Template Users
 

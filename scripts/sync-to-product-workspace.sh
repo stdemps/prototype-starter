@@ -78,6 +78,10 @@ declare -a CURSOR_RULES=(
   ".cursor/rules/agents/user-researcher.mdc"
 )
 
+declare -a CONFIG_FILES=(
+  "docs/framer-mcp-setup.md"
+)
+
 # Track what was synced
 SYNCED_FILES=()
 NEW_FILES=()
@@ -136,6 +140,13 @@ done
 echo ""
 echo "📁 Syncing Cursor rules..."
 for file in "${CURSOR_RULES[@]}"; do
+  copy_file "$file" "$TARGET_DIR/$file"
+done
+
+# Sync configuration files
+echo ""
+echo "📁 Syncing configuration files..."
+for file in "${CONFIG_FILES[@]}"; do
   copy_file "$file" "$TARGET_DIR/$file"
 done
 
