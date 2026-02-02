@@ -12,7 +12,7 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 - **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Implementation Plan)
 - **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
 - **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
-- **Documentation structure:** PRD templates, reviewer personas ready to use
+- **Documentation structure:** PRD templates, responsive design checklist, and agent rules (Cursor)
 - **Dark mode:** Fully configured and working out of the box
 - **Type-safe:** TypeScript strict mode enabled
 - **Accessible:** WCAG 2.1 AA guidelines built-in
@@ -110,12 +110,15 @@ prototype-starter/
 │           ├── tech-stack.md
 │           └── voice-tone.md
 ├── .github/
-│   └── repository-template/
+│   ├── repository-template/
+│   └── TEMPLATE_CHECKLIST.md  # Pre-commit checklist for template maintenance
 ├── docs/
 │   ├── prds/               # PRD templates
 │   ├── research/           # Research documentation
 │   ├── prototypes/         # Design prototypes
-│   └── responsive-design-checklist.md # Mobile-first design reference
+│   └── responsive-design-checklist.md
+├── prompts/                # Implementation prompts (testing, architecture, etc.)
+├── scripts/                # Template and sync scripts
 ├── app/
 │   ├── layout.tsx
 │   ├── page.tsx
@@ -220,12 +223,15 @@ For immediate help and quick questions. Best for debugging, spot advice, or maki
 
 **Workflow:**
 ```
-Question → /engineer or /designer → Immediate Answer → Action
+Question → /engineer, /designer, /pm, /executive, or /user-researcher → Immediate Answer → Action
 ```
 
-**Skills:**
+**Agents (conversational):**
 - `/engineer "your question"` - Technical questions, architecture, debugging
 - `/designer "your question"` - UX questions, design guidance, accessibility
+- `/pm "your question"` - Product strategy, scope, prioritization
+- `/executive "your question"` - Business cases, stakeholder alignment
+- `/user-researcher "your question"` - User validation, research planning
 
 **When to use:**
 - ✅ Quick technical/design questions
@@ -287,6 +293,9 @@ Use `docs/prds/template-prd.md` as a starting point for your product requirement
 ### Responsive Design Checklist
 Use [docs/responsive-design-checklist.md](docs/responsive-design-checklist.md) before starting UI work and when reviewing designs (mobile-first, breakpoints, touch targets).
 
+### Prompt library
+Use the prompts in `prompts/` for implementation guidance: [testing](prompts/testing.md), [architecture](prompts/architecture.md), [development](prompts/development.md), [code-review](prompts/code-review.md), and more. See [prompts/README.md](prompts/README.md).
+
 ### Agent perspectives (Cursor rules)
 Use the agent rules in `.cursor/rules/agents/` for multi-perspective feedback. Reference them in Cursor with `@`:
 - `@engineer` — Technical feasibility and architecture
@@ -297,6 +306,8 @@ Use the agent rules in `.cursor/rules/agents/` for multi-perspective feedback. R
 - Plus skill rules: `@pm-generate-prd`, `@designer-prd-to-ux`, `@ux-to-implementation-plan`, etc.
 
 ## Customization
+
+For step-by-step setup, see [SETUP.md](SETUP.md).
 
 ### 1. Update Project Context
 Edit `.cursor/rules/project-context.mdc` with your project-specific information.
@@ -336,12 +347,12 @@ npx shadcn@latest add [component-name]
 This repository (**prototype-starter**) is designed for rapid prototyping with:
 - Minimal setup and configuration
 - Fast onboarding (< 5 minutes)
-- Basic AI agents (Engineer, Designer) for quick guidance
+- Five AI agents (PM, Engineer, Designer, Executive, User Researcher) and PRD pipeline skills for quick guidance
 - Lenient quality checks that never block commits
-- Simple Cursor rules and documentation templates
+- Cursor rules for all agents and skills, plus UI guidelines and documentation templates
 
 For comprehensive product development with advanced features, use:
-- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent collaboration (adds PM agent + `/collab` orchestration), strict quality gates with prototype mode, mobile-first enforcement
+- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent orchestration (`/collab`), strict quality gates with prototype mode, mobile-first enforcement
 
 **Choose prototype-starter when:**
 - Quick prototyping and experimentation
@@ -351,7 +362,7 @@ For comprehensive product development with advanced features, use:
 
 **Choose product-workspace when:**
 - Building production applications
-- Need multi-perspective feedback synthesis (Engineer + Designer + PM)
+- Need orchestrated multi-agent workflows beyond the five agents in this template
 - Want strict quality enforcement with flexible prototype mode
 - Working in teams with multiple roles
 - Need mobile-first pattern validation

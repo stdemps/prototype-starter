@@ -77,4 +77,3 @@ Agent definitions in this folder (markdown) and in `.claude/agents/` (JavaScript
 - `user-researcher.md` — User Research agent
 
 The **PM** agent is defined in `.claude/agents/pm.js` and `.cursor/rules/agents/pm.mdc` (no separate markdown file in this folder).
-
