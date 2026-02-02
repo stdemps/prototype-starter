@@ -73,7 +73,7 @@ declare -a CURSOR_RULES=(
   ".cursor/rules/agents/pm-generate-prd.mdc"
   ".cursor/rules/agents/pm-clarify-prd.mdc"
   ".cursor/rules/agents/designer-prd-to-ux.mdc"
-  ".cursor/rules/agents/ux-to-prompts.mdc"
+  ".cursor/rules/agents/ux-to-implementation-plan.mdc"
   ".cursor/rules/agents/executive.mdc"
   ".cursor/rules/agents/user-researcher.mdc"
 )

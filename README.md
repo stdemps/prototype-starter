@@ -71,7 +71,7 @@ prototype-starter/
 │   │   ├── prd-generator.js    # MVP idea → PRD
 │   │   ├── prd-clarifier.js    # PRD refinement Q&A
 │   │   ├── prd-to-ux.js        # PRD → UX spec
-│   │   ├── ux-to-prompts.js    # UX spec → implementation plan
+│   │   ├── ux-to-implementation-plan.js    # UX spec → implementation plan
 │   │   └── brand-identity.js   # Brand consistency (colors, voice, tech)
 │   ├── hooks/              # Git hooks
 │   │   └── quality-gate.sh # Lenient pre-commit checks

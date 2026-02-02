@@ -37,7 +37,7 @@
       "description": "🎨 Designer Skill: Translate PRDs into UX specifications (6-pass framework)"
     },
     "ux-to-implementation-plan": {
-      "path": "./skills/ux-to-prompts.js",
+      "path": "./skills/ux-to-implementation-plan.js",
       "description": "🔧 Utility: Generate implementation plan with small, context-efficient chunks from UX specs"
     }
   },
