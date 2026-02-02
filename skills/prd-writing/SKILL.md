@@ -33,8 +33,9 @@ Use this skill when:
 - Common pitfalls to avoid
 - Demo-grade vs enterprise approaches
 
-## Related Agents
+## Related Agents & Skills (Claude Code)
 
-- `/prd-generator` - Generates PRDs from rough ideas
-- `/prd-clarifier` - Refines PRDs through structured questioning
-- `/prd-to-ux` - Translates PRDs to UX specifications
+- `/pm-generate-prd` - Generates PRDs from rough ideas
+- `/pm-clarify-prd` - Refines PRDs through structured questioning
+- `/designer-prd-to-ux` - Translates PRDs to UX specifications (6-pass framework)
+- `/ux-to-implementation-plan` - Transforms UX specs into implementation plans with small, context-efficient chunks

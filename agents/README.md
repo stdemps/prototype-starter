@@ -6,6 +6,7 @@ AI agents with distinct perspectives, expertise, and capabilities. These agents 
 
 | Agent | Perspective | Best For |
 |-------|-------------|----------|
+| **PM** | Product strategy & scope | PRDs, prioritization, problem framing, scope management |
 | **Engineer** | Technical feasibility & architecture | Technical reviews, system design, debugging, implementation planning |
 | **Designer** | User experience & visual design | UX reviews, user flows, accessibility, design system decisions |
 | **Executive** | Strategic business & ROI | Business cases, prioritization, stakeholder alignment, go/no-go decisions |
@@ -30,7 +31,7 @@ Now, [your request]
 ### Invoking Multiple Agents
 For comprehensive feedback, invoke multiple agents on the same problem:
 ```
-Review this PRD from the perspectives of Engineer, Designer, and User Researcher agents.
+Review this PRD from the perspectives of PM, Engineer, Designer, and User Researcher agents.
 ```
 
 ## Agent Capabilities
@@ -47,7 +48,7 @@ Each agent can:
 
 | Situation | Agent(s) to Use |
 |-----------|-----------------|
-| PRD review | All four for comprehensive feedback |
+| PRD review | All five for comprehensive feedback |
 | Technical architecture decision | Engineer |
 | User flow design | Designer + User Researcher |
 | Feature prioritization | Executive + User Researcher |
@@ -68,8 +69,12 @@ Feel free to modify agent definitions to match your team's needs:
 
 ## Files
 
-- `engineer.md` — Engineering/Technical agent
+Agent definitions in this folder (markdown) and in `.claude/agents/` (JavaScript for Claude Code):
+
 - `designer.md` — Design/UX agent
+- `engineer.md` — Engineering/Technical agent
 - `executive.md` — Business/Strategy agent
 - `user-researcher.md` — User Research agent
+
+The **PM** agent is defined in `.claude/agents/pm.js` and `.cursor/rules/agents/pm.mdc` (no separate markdown file in this folder).
 

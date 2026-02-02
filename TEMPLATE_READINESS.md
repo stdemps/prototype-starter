@@ -23,7 +23,7 @@ This document tracks the readiness of this repository as a GitHub template.
 - [x] All agent files executable and properly formatted
 - [x] PM, Executive, and User Researcher agents added
 - [x] All Cursor rules created for agents and skills
-- [x] PRD pipeline skills (generate, clarify, prd-to-ux, ux-to-implementation-plan) configured
+- [x] PRD pipeline skills (pm-generate-prd, pm-clarify-prd, designer-prd-to-ux, ux-to-implementation-plan) configured
 
 ### Template Files
 - [x] `.cursor/rules/project-context.mdc` - Template ready (users customize)
@@ -89,7 +89,7 @@ This template includes:
 - ✅ Tailwind CSS + shadcn/ui
 - ✅ Dark mode support
 - ✅ 5 Claude agents (engineer, designer, pm, executive, user-researcher)
-- ✅ 5 Claude skills (PRD pipeline: generate, clarify, prd-to-ux, ux-to-implementation-plan, brand-identity)
+- ✅ 5 Claude skills (PRD pipeline: pm-generate-prd, pm-clarify-prd, designer-prd-to-ux, ux-to-implementation-plan, designer-brand-identity)
 - ✅ Cursor rules for auto-loaded context (all agents + skills)
 - ✅ PRD templates and documentation structure
 - ✅ Brand identity skill (customizable)

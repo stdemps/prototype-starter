@@ -117,7 +117,7 @@ Create a `.env.local` file for environment variables:
 1. **Write PRD** → Drop into `docs/prds/`
 2. **Open in Cursor** → Context auto-loads from `.cursor/rules/`
 3. **Reference PRD** → Use `@docs/prds/your-prd.md`
-4. **Get Feedback** → Use reviewer personas: `@docs/reviewers/engineer.md`
+4. **Get Feedback** → Use agent rules: `@engineer`, `@designer`, `@pm`, `@executive`, `@user-researcher` (from `.cursor/rules/agents/`)
 5. **Build** → Start coding with all context available!
 
 ## Troubleshooting
@@ -152,7 +152,7 @@ npm run build
 
 - Read the [README.md](./README.md) for more information
 - Check out the [PRD template](./docs/prds/template-prd.md)
-- Explore the [reviewer personas](./docs/reviewers/)
+- Use agent rules in [.cursor/rules/agents/](./.cursor/rules/agents/) for multi-perspective feedback
 - Customize the [UI guidelines](./.cursor/rules/ui-design-guidelines.mdc) if needed
 
 ## Getting Help

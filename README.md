@@ -8,7 +8,7 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
 - **Two workflow approaches:** PRD-to-code pipeline for structured specs OR direct guidance for quick questions
-- **Quick AI guidance:** Built-in agents (`/engineer`, `/designer`, `/prd-generator`, `/prd-to-ux`, etc.) for instant help
+- **Quick AI guidance:** Built-in agents and skills (`/engineer`, `/designer`, `/pm-generate-prd`, `/designer-prd-to-ux`, `/ux-to-implementation-plan`, etc.) for instant help
 - **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Implementation Plan)
 - **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
 - **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
@@ -65,29 +65,44 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 ```
 prototype-starter/
 ├── .claude/
-│   ├── agents/             # AI agents and skills
+│   ├── agents/             # Claude Code agents (conversational)
 │   │   ├── engineer.js     # Technical questions
 │   │   ├── designer.js     # UX questions
-│   │   ├── prd-generator.js    # MVP idea → PRD
-│   │   ├── prd-clarifier.js    # PRD refinement Q&A
-│   │   ├── prd-to-ux.js        # PRD → UX spec
-│   │   ├── ux-to-implementation-plan.js    # UX spec → implementation plan
-│   │   └── brand-identity.js   # Brand consistency (colors, voice, tech)
-│   ├── hooks/              # Git hooks
-│   │   └── quality-gate.sh # Lenient pre-commit checks
+│   │   ├── pm.js           # Product strategy & scope
+│   │   ├── executive.js    # Business & prioritization
+│   │   └── user-researcher.js  # User validation & research
+│   ├── skills/             # Claude Code skills (PRD pipeline)
+│   │   ├── pm-generate-prd.js      # MVP idea → PRD
+│   │   ├── pm-clarify-prd.js       # PRD refinement Q&A
+│   │   ├── designer-prd-to-ux.js   # PRD → UX spec (6-pass)
+│   │   ├── ux-to-implementation-plan.js  # UX spec → implementation plan
+│   │   └── designer-brand-identity.js    # Brand tokens & voice
+│   ├── hooks/
+│   │   └── quality-gate.sh  # Lenient pre-commit checks
 │   └── claude.json         # Claude Code configuration
 ├── .cursor/
 │   └── rules/              # Auto-loaded context (available via @ mentions)
 │       ├── ui-design-guidelines.mdc
 │       ├── coding-standards.mdc
 │       ├── project-context.mdc
-│       └── agents/         # Agent-specific rules
+│       └── agents/         # Agent and skill rules
 │           ├── brand-identity.mdc
 │           ├── designer.mdc
+│           ├── designer-prd-to-ux.mdc
 │           ├── engineer.mdc
 │           ├── executive.mdc
-│           └── user-researcher.mdc
-├── skills/                # Brand identity skill (customizable)
+│           ├── pm.mdc
+│           ├── pm-clarify-prd.mdc
+│           ├── pm-generate-prd.mdc
+│           ├── user-researcher.mdc
+│           └── ux-to-implementation-plan.mdc
+├── agents/                 # Agent overview docs (markdown)
+│   ├── README.md
+│   ├── designer.md
+│   ├── engineer.md
+│   ├── executive.md
+│   └── user-researcher.md
+├── skills/                 # Brand identity skill (customizable)
 │   └── brand-identity/
 │       ├── SKILL.md
 │       └── resources/
@@ -95,13 +110,13 @@ prototype-starter/
 │           ├── tech-stack.md
 │           └── voice-tone.md
 ├── .github/
-│   └── repository-template/  # GitHub template configuration
+│   └── repository-template/
 ├── docs/
 │   ├── prds/               # PRD templates
 │   ├── research/           # Research documentation
 │   ├── prototypes/         # Design prototypes
-│   └── reviewers/          # Reviewer personas
-├── app/                    # Next.js App Router
+│   └── responsive-design-checklist.md # Mobile-first design reference
+├── app/
 │   ├── layout.tsx
 │   ├── page.tsx
 │   └── globals.css
@@ -164,17 +179,17 @@ For turning ideas into buildable specs through structured documents. Best for ne
 
 **Workflow:**
 ```
-Idea → /prd-generator → PRD
-PRD → /prd-clarifier → Refined PRD (optional)
-PRD → /prd-to-ux → UX Spec
+Idea → /pm-generate-prd → PRD
+PRD → /pm-clarify-prd → Refined PRD (optional)
+PRD → /designer-prd-to-ux → UX Spec
 UX Spec → /ux-to-implementation-plan → Implementation Plan
 Implementation Plan → Work through tasks incrementally → Code
 ```
 
-**Skills:**
-- `/prd-generator "your idea"` - Convert rough MVP ideas into structured PRDs
-- `/prd-clarifier docs/prds/feature.md` - Refine PRDs through structured Q&A
-- `/prd-to-ux docs/prds/feature.md` - Translate PRDs into UX specs (6 designer passes)
+**Skills (Claude Code — names match claude.json keys):**
+- `/pm-generate-prd "your idea"` - Convert rough MVP ideas into structured PRDs
+- `/pm-clarify-prd docs/prds/feature.md` - Refine PRDs through structured Q&A
+- `/designer-prd-to-ux docs/prds/feature.md` - Translate PRDs into UX specs (6 designer passes)
 - `/ux-to-implementation-plan docs/prds/feature-ux-spec.md` - Transform UX specs into implementation plan with small, context-efficient chunks
 
 **When to use:**
@@ -187,10 +202,10 @@ Implementation Plan → Work through tasks incrementally → Code
 **Example:**
 ```bash
 # Step 1: Generate PRD from idea
-/prd-generator "A dashboard for tracking daily habits"
+/pm-generate-prd "A dashboard for tracking daily habits"
 
 # Step 2: Create UX specification (optional clarification first)
-/prd-to-ux docs/prds/daily-habits.md
+/designer-prd-to-ux docs/prds/daily-habits.md
 
 # Step 3: Generate implementation plan with small, context-efficient chunks
 /ux-to-implementation-plan docs/prds/daily-habits-ux-spec.md
@@ -269,12 +284,17 @@ SKIP_QUALITY_GATE=1 git commit -m "Quick fix"
 ### PRD Template
 Use `docs/prds/template-prd.md` as a starting point for your product requirements documents.
 
-### Reviewer Personas
-Use the reviewer personas in `docs/reviewers/` to get multi-perspective feedback:
-- `@docs/reviewers/engineer.md` - Technical feasibility
-- `@docs/reviewers/designer.md` - UX and design
-- `@docs/reviewers/executive.md` - Business and strategy
-- `@docs/reviewers/user-researcher.md` - User research and validation
+### Responsive Design Checklist
+Use [docs/responsive-design-checklist.md](docs/responsive-design-checklist.md) before starting UI work and when reviewing designs (mobile-first, breakpoints, touch targets).
+
+### Agent perspectives (Cursor rules)
+Use the agent rules in `.cursor/rules/agents/` for multi-perspective feedback. Reference them in Cursor with `@`:
+- `@engineer` — Technical feasibility and architecture
+- `@designer` — UX and design
+- `@pm` — Product strategy and scope
+- `@executive` — Business and strategy
+- `@user-researcher` — User research and validation
+- Plus skill rules: `@pm-generate-prd`, `@designer-prd-to-ux`, `@ux-to-implementation-plan`, etc.
 
 ## Customization
 
@@ -353,32 +373,8 @@ This template starts with **zero testing infrastructure** by design - add testin
 - Framework-agnostic approach - use any testing tool you prefer
 - Optional UI verification with screenshots for visual correctness
 
-### Ralph Loop for Autonomous Development
-
-**[Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)** is a Claude Code plugin that enables autonomous, multi-hour development workflows with self-correction.
-
-**Perfect for prototyping:**
-- ✅ Autonomous feature implementation while you do other work
-- ✅ Self-correcting loops that fix errors until tests pass
-- ✅ Objective completion criteria (tests, builds, linters)
-- ✅ Cost-effective for rapid iteration ($1-25 depending on complexity)
-
-**Quick start:**
-```bash
-# Install Ralph Loop plugin
-/plugin install ralph-wiggum@claude-plugins-official
-
-# Example: Fix all linter errors autonomously
-/ralph-loop "Fix all ESLint errors. Exit when: npm run lint shows 0 problems" --max-iterations 15
-```
-
-**Learn more:**
-- [Ralph Loop Guide](./docs/ralph-loop-guide.md) - Complete guide with prototyping patterns
-- Always use `--max-iterations` for cost control
-- Best for tasks with objective success criteria (tests, builds, linters)
-
-**For production-grade autonomous workflows:**
-[product-workspace](https://github.com/stdemps/product-workspace) includes pre-configured testing infrastructure and Ralph Loop patterns built-in.
+**For production-grade development:**
+[product-workspace](https://github.com/stdemps/product-workspace) includes pre-configured testing infrastructure, quality gates, and multi-agent collaboration.
 
 ## Resources
 
