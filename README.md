@@ -8,11 +8,12 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
 - **Two workflow approaches:** PRD-to-code pipeline for structured specs OR direct guidance for quick questions
-- **Quick AI guidance:** Built-in agents and skills (`/engineer`, `/designer`, `/pm-generate-prd`, `/designer-prd-to-ux`, `/ux-to-implementation-plan`, etc.) for instant help
-- **PRD pipeline:** Turn ideas into buildable specs with structured workflows (Idea → PRD → UX → Implementation Plan)
-- **Lenient quality checks:** Optional pre-commit checks that warn but never block (perfect for prototyping)
-- **Cursor-ready:** `.cursor/rules/` auto-loaded with UI guidelines and coding standards
-- **Documentation structure:** PRD templates, responsive design checklist, and agent rules (Cursor)
+- **Quick AI guidance:** Built-in agents (`/engineer`, `/designer`, `/pm`) for instant help
+- **UI refinement commands:** 17 Impeccable commands (`/audit`, `/polish`, `/simplify`, etc.) for quality and polish
+- **PRD pipeline:** Turn ideas into buildable specs (Idea → PRD → UX → Implementation Plan)
+- **Design skills:** `frontend-design` for creative UI, `ui-ux-pro-max` for design lookups, `vercel-react-best-practices` for performance
+- **Lenient quality checks:** Pre-commit checks that warn but never block (perfect for prototyping)
+- **Dual IDE support:** Works with both Claude Code and Cursor (mirrored skills in `.claude/` and `.cursor/`)
 - **Dark mode:** Fully configured and working out of the box
 - **Type-safe:** TypeScript strict mode enabled
 - **Accessible:** WCAG 2.1 AA guidelines built-in
@@ -64,70 +65,48 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 ```
 prototype-starter/
-├── .claude/
-│   ├── agents/             # Claude Code agents (conversational)
-│   │   ├── engineer.js     # Technical questions
-│   │   ├── designer.js     # UX questions
-│   │   ├── pm.js           # Product strategy & scope
-│   │   ├── executive.js    # Business & prioritization
-│   │   └── user-researcher.js  # User validation & research
-│   ├── skills/             # Claude Code skills (PRD pipeline)
-│   │   ├── pm-generate-prd.js      # MVP idea → PRD
-│   │   ├── pm-clarify-prd.js       # PRD refinement Q&A
-│   │   ├── designer-prd-to-ux.js   # PRD → UX spec (6-pass)
-│   │   ├── ux-to-implementation-plan.js  # UX spec → implementation plan
-│   │   └── designer-brand-identity.js    # Brand tokens & voice
+├── .claude/                    # Claude Code configuration
+│   ├── SKILLS.md               # Skills & commands reference
+│   ├── agents/                 # Conversational agents
+│   │   ├── engineer.js         # Technical questions
+│   │   ├── designer.js         # UX questions
+│   │   ├── pm.js               # Product strategy
+│   │   ├── executive.js        # Business & prioritization
+│   │   └── user-researcher.js  # User validation
+│   ├── commands/               # Impeccable UI refinement commands
+│   │   ├── audit.md            # Quality checks
+│   │   ├── polish.md           # Final refinement
+│   │   ├── simplify.md         # Remove complexity
+│   │   └── ...                 # 14 more commands
+│   ├── skills/                 # AI skills
+│   │   ├── frontend-design/    # Primary design guidance
+│   │   ├── ui-ux-pro-max/      # Design reference database
+│   │   ├── vercel-react-best-practices/  # React/Next.js patterns
+│   │   ├── pm-generate-prd.js  # PRD pipeline skills
+│   │   └── ...
 │   ├── hooks/
-│   │   └── quality-gate.sh  # Lenient pre-commit checks
-│   └── claude.json         # Claude Code configuration
-├── .cursor/
-│   └── rules/              # Auto-loaded context (available via @ mentions)
+│   │   └── quality-gate.sh     # Lenient pre-commit checks
+│   └── claude.json             # Claude Code config
+├── .cursor/                    # Cursor configuration (mirrors .claude/)
+│   ├── SKILLS.md               # Skills reference for Cursor
+│   ├── commands/               # Impeccable commands (@ mention)
+│   ├── checklists/             # Design/workflow checklists
+│   ├── skills/                 # AI skills
+│   └── rules/                  # Auto-loaded context
 │       ├── ui-design-guidelines.mdc
 │       ├── coding-standards.mdc
-│       ├── project-context.mdc
-│       └── agents/         # Agent and skill rules
-│           ├── brand-identity.mdc
-│           ├── designer.mdc
-│           ├── designer-prd-to-ux.mdc
-│           ├── engineer.mdc
-│           ├── executive.mdc
-│           ├── pm.mdc
-│           ├── pm-clarify-prd.mdc
-│           ├── pm-generate-prd.mdc
-│           ├── user-researcher.mdc
-│           └── ux-to-implementation-plan.mdc
-├── agents/                 # Agent overview docs (markdown)
-│   ├── README.md
-│   ├── designer.md
-│   ├── engineer.md
-│   ├── executive.md
-│   └── user-researcher.md
-├── skills/                 # Brand identity skill (customizable)
-│   └── brand-identity/
-│       ├── SKILL.md
-│       └── resources/
-│           ├── design-tokens.json
-│           ├── tech-stack.md
-│           └── voice-tone.md
-├── .github/
-│   ├── repository-template/
-│   └── TEMPLATE_CHECKLIST.md  # Pre-commit checklist for template maintenance
+│       └── agents/             # Agent rules
 ├── docs/
-│   ├── prds/               # PRD templates
-│   ├── research/           # Research documentation
-│   ├── prototypes/         # Design prototypes
-│   └── responsive-design-checklist.md
-├── prompts/                # Implementation prompts (testing, architecture, etc.)
-├── scripts/                # Template and sync scripts
-├── app/
+│   ├── prds/                   # PRD templates
+│   └── research/               # Research documentation
+├── prompts/                    # Implementation prompts
+├── app/                        # Next.js app
 │   ├── layout.tsx
 │   ├── page.tsx
 │   └── globals.css
 ├── components/
-│   ├── ui/                 # shadcn/ui components
-│   ├── theme-provider.tsx
-│   ├── theme-toggle.tsx
-│   └── topbar.tsx
+│   ├── ui/                     # shadcn/ui components
+│   └── ...
 └── lib/
     └── utils.ts
 ```
@@ -171,6 +150,46 @@ Get instant help from built-in agents. See [Two Workflow Approaches](#two-workfl
 ```
 
 These agents provide quick, context-aware advice without leaving your workflow.
+
+## UI Refinement Commands (Impeccable)
+
+Polish and refine your UI with these specialized commands. Run `/teach-impeccable` once to set up project context.
+
+**Quality & Review:**
+```bash
+/audit           # Comprehensive quality check (a11y, perf, responsive)
+/critique        # UX design review (hierarchy, clarity)
+/polish          # Final refinement before release
+```
+
+**Simplification & Cleanup:**
+```bash
+/simplify        # Remove unnecessary complexity
+/normalize       # Align with design system
+/clarify         # Improve UX copy and labels
+```
+
+**Enhancement:**
+```bash
+/animate         # Add purposeful motion
+/colorize        # Add strategic color
+/bolder          # Amplify understated designs
+/quieter         # Tone down aggressive designs
+/delight         # Add moments of joy
+```
+
+**Production Readiness:**
+```bash
+/optimize        # Performance improvements
+/harden          # Error handling, edge cases
+/adapt           # Responsive design fixes
+/extract         # Create reusable components
+/onboard         # Design onboarding flows
+```
+
+Most commands accept an optional argument to focus on a specific area, e.g., `/audit navbar`
+
+See [.claude/SKILLS.md](.claude/SKILLS.md) for the complete skills reference.
 
 ## Two Workflow Approaches
 
@@ -291,7 +310,7 @@ SKIP_QUALITY_GATE=1 git commit -m "Quick fix"
 Use `docs/prds/template-prd.md` as a starting point for your product requirements documents.
 
 ### Responsive Design Checklist
-Use [docs/responsive-design-checklist.md](docs/responsive-design-checklist.md) before starting UI work and when reviewing designs (mobile-first, breakpoints, touch targets).
+Use [.cursor/checklists/responsive-design-checklist.md](.cursor/checklists/responsive-design-checklist.md) before starting UI work and when reviewing designs (mobile-first, breakpoints, touch targets).
 
 ### Prompt library
 Use the prompts in `prompts/` for implementation guidance: [testing](prompts/testing.md), [architecture](prompts/architecture.md), [development](prompts/development.md), [code-review](prompts/code-review.md), and more. See [prompts/README.md](prompts/README.md).

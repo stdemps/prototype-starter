@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { Agentation } from "agentation"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
           <Toaster />
+          {process.env.NODE_ENV === "development" && <Agentation />}
         </ThemeProvider>
       </body>
     </html>

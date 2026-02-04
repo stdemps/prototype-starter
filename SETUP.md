@@ -8,6 +8,8 @@ Step-by-step instructions to get your workspace up and running.
 - Git
 - Cursor (recommended) or your preferred editor
 
+Workspace settings (format on save, ESLint, Tailwind, recommended extensions) are in `.vscode/`. Cursor will prompt to install recommended extensions when you open the project.
+
 ## Initial Setup
 
 ### 1. Get the Template
@@ -46,7 +48,7 @@ node template.config.js
 Or manually update:
 - `package.json` - Project name and version
 - `app/layout.tsx` - App metadata
-- `.cursor/rules/project-context.mdc` - Project context
+- `.cursor/rules/project-context.mdc` - Project context. You can fill it manually or run the setup-project-context command: reference it with `@setup-project-context` and optionally a PRD path (e.g. `@setup-project-context use docs/prds/my-prd.md`) to pre-fill from a PRD, then answer a few questions. When done, the file will have `alwaysApply: true` so the AI gets it every session. After adding research in `docs/research/` (e.g. `user-personas.md`), run `@sync-research-to-context` to update the User Personas section from research.
 
 ### 4. Git Setup
 

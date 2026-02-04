@@ -15,7 +15,7 @@ AI agents with distinct perspectives, expertise, and capabilities. These agents 
 ## How to Use
 
 ### In Cursor
-Agents are available as Cursor rules. Reference them with `@` or ask them directly:
+The definitions Cursor uses are in `.cursor/rules/agents/` (`.mdc` files). The markdown files in this folder are for other tools and for reference. Reference agents with `@` or ask them directly:
 - "As the Engineer agent, review this PRD"
 - "Designer, help me think through the mobile experience"
 - "@engineer what are the technical risks here?"

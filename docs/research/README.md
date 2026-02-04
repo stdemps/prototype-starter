@@ -27,3 +27,31 @@ This directory is for storing user research, competitive analysis, and other res
 - `user-personas.md`
 - `pain-points-synthesis.md`
 
+---
+
+## File conventions (sync to project context)
+
+These conventions let you sync research into `.cursor/rules/project-context.mdc` via the **sync-research-to-context** command so the AI has up-to-date personas and pain points.
+
+### user-personas.md
+
+Use one heading per persona, then Role / Goals / Pain points. The sync maps this into the project context **User Personas** section.
+
+```markdown
+## [Persona Name]
+
+- **Role:** [One line]
+- **Goals:** [What they want to achieve]
+- **Pain Points:** [What frustrates them or blocks them]
+```
+
+You can use `###` for persona names if you prefer. Multiple personas = multiple sections. Add any extra bullets (e.g. context, quote); the sync will preserve them.
+
+### pain-points-synthesis.md
+
+Optional. Use a list of pain points (global or per segment). The sync can merge these into persona **Pain Points** or keep them as a short summary in project context. Structure is flexible (headings, bullets, or paragraphs).
+
+### Key terminology
+
+If you have a research file that defines domain terms (e.g. `key-terms.md` or a section in an insights doc), use **Term:** definition. The sync can update the **Key Terminology** section in project context when present.
+
