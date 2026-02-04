@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Sync Script: Copy agent and skill files from prototype-starter to product-workspace
+# Sync Script: Copy agents, skills, commands, and rules from prototype-starter to product-workspace
 #
-# This script syncs agent files, Cursor rules, and configuration updates
-# from prototype-starter to product-workspace. Since product-workspace is
-# more elaborate, it may have additional files which will be preserved.
+# This script syncs agent files, Cursor rules, commands, skills (and their data),
+# checklists, and configuration updates from prototype-starter to product-workspace.
+# Product-workspace may have additional files which will be preserved.
 #
 # Usage: ./sync-to-product-workspace.sh [product-workspace-path]
 
@@ -76,10 +76,26 @@ declare -a CURSOR_RULES=(
   ".cursor/rules/agents/ux-to-implementation-plan.mdc"
   ".cursor/rules/agents/executive.mdc"
   ".cursor/rules/agents/user-researcher.mdc"
+  ".cursor/rules/ui-design-guidelines.mdc"
+  ".cursor/rules/coding-standards.mdc"
+  ".cursor/rules/project-context.mdc"
 )
 
 declare -a CONFIG_FILES=(
   "docs/framer-mcp-setup.md"
+  ".cursor/checklists/responsive-design-checklist.md"
+  ".claude/SKILLS.md"
+  ".cursor/SKILLS.md"
+  ".vscode/extensions.json"
+  ".vscode/settings.json"
+)
+
+# Directories to sync recursively (all files under these paths)
+declare -a SYNC_DIRS=(
+  ".claude/commands"
+  ".cursor/commands"
+  ".claude/skills"
+  ".cursor/skills"
 )
 
 # Track what was synced
@@ -95,8 +111,8 @@ copy_file() {
   rel_path="${rel_path#.cursor/}"
   
   if [ ! -f "$SOURCE_DIR/$src" ]; then
-    echo "⚠️  Source file not found: $src"
-    return 1
+    echo "  ⚠️  Skip (not in source): $src"
+    return 0
   fi
   
   # Create target directory if needed
@@ -121,6 +137,19 @@ copy_file() {
   SYNCED_FILES+=("$src")
 }
 
+# Sync a directory recursively (each file tracked in summary)
+sync_dir() {
+  local dir="$1"
+  if [ ! -d "$SOURCE_DIR/$dir" ]; then
+    echo "  ⚠️  Source dir not found: $dir"
+    return 0
+  fi
+  while IFS= read -r -d '' path; do
+    rel="${path#$SOURCE_DIR/}"
+    copy_file "$rel" "$TARGET_DIR/$rel"
+  done < <(find "$SOURCE_DIR/$dir" -type f -print0)
+}
+
 # Sync agent files
 echo "📁 Syncing Claude agents..."
 for file in "${AGENT_FILES[@]}"; do
@@ -141,6 +170,16 @@ echo ""
 echo "📁 Syncing Cursor rules..."
 for file in "${CURSOR_RULES[@]}"; do
   copy_file "$file" "$TARGET_DIR/$file"
+done
+
+# Sync commands and skills directories (recursive)
+echo ""
+echo "📁 Syncing commands and skills..."
+for dir in "${SYNC_DIRS[@]}"; do
+  if [ -d "$SOURCE_DIR/$dir" ]; then
+    echo "  📂 $dir/"
+    sync_dir "$dir"
+  fi
 done
 
 # Sync configuration files
