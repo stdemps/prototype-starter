@@ -2,7 +2,7 @@
 
 A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tailwind CSS, and shadcn/ui. Pre-configured with Cursor rules, documentation templates, and full dark mode support.
 
-> **Need comprehensive product development features?** Check out [product-workspace](https://github.com/stdemps/product-workspace) for multi-agent collaboration, quality gates, and mobile-first enforcement.
+> **Need comprehensive product development features?** Check out [product-workspace](https://github.com/yourusername/product-workspace) for multi-agent collaboration, quality gates, and mobile-first enforcement.
 
 ## Features
 
@@ -343,6 +343,12 @@ Use shadcn/ui CLI to add more components:
 npx shadcn@latest add [component-name]
 ```
 
+## Security
+
+- **[SECURITY.md](./SECURITY.md)** – Secrets, auth, input validation, and security tooling guidance.
+- **Never commit** `.env.local` or real secrets; use environment variables or a secret manager in production.
+- Example secure API + form: see `/contact` and `app/api/contact/route.ts`. For CI and SAST examples, see `docs/examples/`.
+
 ## Tech Stack
 
 - **Next.js 16** - React framework with App Router
@@ -371,7 +377,7 @@ This repository (**prototype-starter**) is designed for rapid prototyping with:
 - Cursor rules for all agents and skills, plus UI guidelines and documentation templates
 
 For comprehensive product development with advanced features, use:
-- [**product-workspace**](https://github.com/stdemps/product-workspace) - Multi-agent orchestration (`/collab`), strict quality gates with prototype mode, mobile-first enforcement
+- [**product-workspace**](https://github.com/yourusername/product-workspace) - Multi-agent orchestration (`/collab`), strict quality gates with prototype mode, mobile-first enforcement
 
 **Choose prototype-starter when:**
 - Quick prototyping and experimentation
@@ -404,7 +410,7 @@ This template starts with **zero testing infrastructure** by design - add testin
 - Optional UI verification with screenshots for visual correctness
 
 **For production-grade development:**
-[product-workspace](https://github.com/stdemps/product-workspace) includes pre-configured testing infrastructure, quality gates, and multi-agent collaboration.
+[product-workspace](https://github.com/yourusername/product-workspace) includes pre-configured testing infrastructure, quality gates, and multi-agent collaboration.
 
 ## Resources
 

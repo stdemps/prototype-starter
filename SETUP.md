@@ -105,6 +105,13 @@ Install shadcn/ui components as needed:
 npx shadcn@latest add [component-name]
 ```
 
+## Security tooling
+
+- **SECURITY.md** (repo root) – Secrets, authentication, input validation, and security practices.
+- **Never commit** `.env.local` or real secrets; use your platform’s secret manager or CI environment variables for production.
+- Example workflows: `docs/examples/github-actions-ci.yml` (CI), `docs/examples/github-actions-sast.yml` (SAST). Copy to `.github/workflows/` as needed.
+- If you add E2E tests that assert on the app title, run `node template.config.js` first so the title matches; re-run after changing the project name so tests stay in sync.
+
 ## Environment Variables
 
 Create a `.env.local` file for environment variables:

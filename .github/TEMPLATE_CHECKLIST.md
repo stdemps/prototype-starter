@@ -60,8 +60,8 @@ Use this checklist before committing changes to ensure the template remains clea
 ## Quick Verification Commands
 
 ```bash
-# Check for personal info
-grep -r "stevendempsterair\|stdemps" . --exclude-dir=node_modules --exclude="*.lock"
+# Check for personal info (replace YOUR_USERNAME with your GitHub username or other identifiers)
+grep -r "YOUR_USERNAME" . --exclude-dir=node_modules --exclude="*.lock"
 
 # Check for hardcoded paths
 grep -r "/Users/" . --exclude-dir=node_modules
