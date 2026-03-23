@@ -40,4 +40,7 @@ This template does not include an auth implementation. When you add one:
 
 ## Reporting vulnerabilities
 
-If you discover a security issue in this template or in a project derived from it, please report it privately (e.g. via maintainer contact or security policy) rather than in a public issue.
+If you discover a security issue in this template or in a project derived from it, please report it **privately** rather than in a public issue:
+
+- **This repository on GitHub:** Use [Security advisories](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability) (**Security** tab → **Report a vulnerability**) if the maintainer has enabled private reporting.
+- **Your own fork:** Configure the same on your repo or publish a `SECURITY.md` with a contact (e.g. security email).

@@ -2,6 +2,8 @@
 
 A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tailwind CSS, and shadcn/ui. Pre-configured with Cursor rules, documentation templates, and full dark mode support.
 
+**Maintainers:** Replace placeholder URLs like `yourusername` in this README with your GitHub org or username before publishing (or after forking).
+
 > **Need comprehensive product development features?** Check out [product-workspace](https://github.com/yourusername/product-workspace) for multi-agent collaboration, quality gates, and mobile-first enforcement.
 
 ## Features
@@ -18,6 +20,11 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 - **Type-safe:** TypeScript strict mode enabled
 - **Accessible:** WCAG 2.1 AA guidelines built-in
 - **Mobile-first:** Responsive patterns documented and ready
+
+## Prerequisites
+
+- **Node.js 20.9+** (LTS) and npm — required by Next.js 16 (see `package.json` `engines` and [SETUP.md](./SETUP.md))
+- **Git**
 
 ## Quick Start
 

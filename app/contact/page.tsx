@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { ContactForm } from "@/components/contact-form"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -19,7 +19,9 @@ export default function ContactPage() {
       <div className="max-w-xl mx-auto">
         <Card>
           <CardHeader>
-            <CardTitle>Contact</CardTitle>
+            <h1 className="text-2xl font-semibold leading-none tracking-tight md:text-3xl">
+              Contact
+            </h1>
             <CardDescription>
               Example form with server-side validation (zod). See{" "}
               <code className="text-xs bg-muted px-1.5 py-0.5 rounded">

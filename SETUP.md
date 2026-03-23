@@ -4,7 +4,7 @@ Step-by-step instructions to get your workspace up and running.
 
 ## Prerequisites
 
-- Node.js 18+ and npm
+- Node.js **20.9+** (LTS) and npm — matches Next.js 16 and CI
 - Git
 - Cursor (recommended) or your preferred editor
 
