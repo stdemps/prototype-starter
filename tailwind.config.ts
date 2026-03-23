@@ -51,19 +51,6 @@ const config = {
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			// TalentSourcer semantic colors
-  			success: {
-  				DEFAULT: 'hsl(var(--success))',
-  				foreground: 'hsl(var(--success-foreground))'
-  			},
-  			warning: {
-  				DEFAULT: 'hsl(var(--warning))',
-  				foreground: 'hsl(var(--warning-foreground))'
-  			},
-  			info: {
-  				DEFAULT: 'hsl(var(--info))',
-  				foreground: 'hsl(var(--info-foreground))'
   			}
   		},
   		borderRadius: {
@@ -108,16 +95,6 @@ const config = {
   			'fade-in': 'fade-in 0.2s ease-out',
   			'slide-up': 'slide-up 0.3s ease-out'
   		},
-  		// TalentSourcer layout tokens
-  		spacing: {
-  			'header': 'var(--header-height)',
-  			'sidebar': 'var(--sidebar-width)',
-  			'sidebar-collapsed': 'var(--sidebar-width-collapsed)'
-  		},
-  		boxShadow: {
-  			'xs': 'var(--shadow-xs)',
-  			'elevated': 'var(--shadow-elevated)'
-  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

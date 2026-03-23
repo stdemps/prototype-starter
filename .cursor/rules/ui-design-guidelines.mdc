@@ -414,6 +414,7 @@ import { CheckCircle2, XCircle, AlertCircle } from "lucide-react"
 
 ## Resources
 
+- **Design System:** See `DESIGN_SYSTEM.md` in the project root for colour tokens, button rules, form conventions, and anti-patterns. Read it before making UI changes.
 - **shadcn/ui Docs:** https://ui.shadcn.com/docs
 - **Tailwind CSS Docs:** https://tailwindcss.com/docs
 - **Lucide Icons:** https://lucide.dev/icons
