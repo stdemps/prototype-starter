@@ -85,7 +85,10 @@ A prototype isn't testable if it doesn't save data! To make your app functional,
 2. Enable **Firestore Database** (you may start in **Test Mode** for local spikes only) and **Authentication** (Email/Password).
 3. Grab your Firebase Config keys from the project settings.
 
-> **Security:** Firestore Test Mode uses **open read/write rules for a limited time**. Use it only on throwaway projects or local experiments. Before any deploy or real users, **replace rules with least-privilege security rules** (and consider [App Check](https://firebase.google.com/docs/app-check)). Never ship production with default test rules. See [Firestore security rules](https://firebase.google.com/docs/firestore/security/get-started). 4. In your code editor, duplicate the file named `.env.example`, rename the copy to `.env.local`, and paste your keys into that new file. 5. Ask AntiGravity or Claude Code to hook it up:
+> **Security:** Firestore Test Mode uses **open read/write rules for a limited time**. Use it only on throwaway projects or local experiments. Before any deploy or real users, **replace rules with least-privilege security rules** (and consider [App Check](https://firebase.google.com/docs/app-check)). Never ship production with default test rules. See [Firestore security rules](https://firebase.google.com/docs/firestore/security/get-started). 
+
+4. In your code editor, duplicate the file named `.env.example`, rename the copy to `.env.local`, and paste your keys into that new file. 
+5. Ask AntiGravity or Claude Code to hook it up:
 > "Hey Claude, use the `/engineer` skill. Hook up my 'Variant A' prototype form so it saves user submissions directly to Firestore."
 
 ### Phase 5: Experimentation & Refinement
