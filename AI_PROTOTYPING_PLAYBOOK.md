@@ -18,16 +18,18 @@ Before jumping in, let's make sure you're oriented in your code editor (Cursor /
 
 ## 🛠️ The Toolchain
 
-Your prototyping environment uses two primary tools, each with a specific superpower:
+Your prototyping environment uses two equally capable AI tools. Both can handle complex, multi-step work autonomously — the main difference is **where you talk to them**:
 
-1. **Claude (CLI or Extension)**
-   - **Best for:** Fast lookups, Q&A, and tapping into specific "Agent Personas".
-   - **Your Choice:** You can run `claude` directly in your terminal if you prefer the speed of the CLI, **OR** you can install the **Claude Extension** in your code editor (like VS Code) for a more visual, chat-like interface. Both work perfectly!
-   - **How it works:** Both methods load the files in `.claude/`—giving you instant access to conversational agents (like `/designer` or `@designer`) and "impeccable" UI commands (`/audit`, `/polish`).
-2. **AntiGravity (Autonomous Agent)**
-   - **Best for:** Heavy lifting, visual processing (image-to-code), and end-to-end autonomous workflows without needing your constant supervision.
+1. **Claude Code (Terminal or Extension)**
+   - **Where to find it:** Run `claude` in your terminal for a fast, keyboard-driven experience, **OR** install the **Claude Code Extension** in your editor (VS Code / Cursor) for a chat-like interface. Both work identically.
+   - **How it works:** Claude Code loads the files in `.claude/`—giving you instant access to conversational agents (like `/designer` or `@designer`), "impeccable" UI commands (`/audit`, `/polish`), and full autonomous coding workflows.
+   - **Superpowers:** Can read Figma files directly (via MCP), build features end-to-end, refactor code, run audits, and handle multi-step tasks without constant supervision.
+2. **AntiGravity (IDE Chat Agent)**
    - **Where to find it:** AntiGravity runs in the primary AI Chat panel in your IDE (e.g., Cursor's chat tab).
-   - **How it works:** It uses `.agents/workflows/` to execute complex multi-step instructions (like scaffolding an entire feature from a Figma mockup).
+   - **How it works:** It uses `.agents/workflows/` to execute multi-step instructions (like scaffolding an entire feature from a Figma mockup).
+   - **Superpowers:** Strong at visual processing (image-to-code), and can run pre-built slash-command workflows.
+
+> **Which should I use?** Whichever feels more natural! Some people prefer the terminal, others prefer the chat panel. You can switch freely between them — they work on the same codebase.
 
 ---
 
@@ -75,7 +77,7 @@ When you are ready to see your Figma designs in code, use the **Figma MCP** to b
 
 > **🖼️ Pro-Tip on Assets:** While the MCP reads layouts and text perfectly, it won't automatically download your high-res photos or custom SVG icons. Manually export those assets from Figma, place them into your `public/` folder, and let Claude know they are there!
 
-_(Alternatively, if you only have screenshots, you can ask AntiGravity to run the `/slash-command prototype_from_mockup` workflow on the attached images)._
+_(Alternatively, if you only have screenshots rather than a Figma file, you can paste or attach them directly to Claude Code or AntiGravity and ask either to turn them into code)._
 
 ### Phase 4: Making it Real (Firebase Data)
 
@@ -88,15 +90,20 @@ A prototype isn't testable if it doesn't save data! To make your app functional,
 > **Security:** Firestore Test Mode uses **open read/write rules for a limited time**. Use it only on throwaway projects or local experiments. Before any deploy or real users, **replace rules with least-privilege security rules** (and consider [App Check](https://firebase.google.com/docs/app-check)). Never ship production with default test rules. See [Firestore security rules](https://firebase.google.com/docs/firestore/security/get-started). 
 
 4. In your code editor, duplicate the file named `.env.example`, rename the copy to `.env.local`, and paste your keys into that new file. 
-5. Ask AntiGravity or Claude Code to hook it up:
+5. Ask Claude Code or AntiGravity to hook it up:
 > "Hey Claude, use the `/engineer` skill. Hook up my 'Variant A' prototype form so it saves user submissions directly to Firestore."
 
 ### Phase 5: Experimentation & Refinement
 
-Your goal is to experiment! Ask AntiGravity to spin up a "Variant B". Once you settle on a layout, refine it using the autonomous polish workflow:
+Your goal is to experiment! Ask either tool to spin up a "Variant B" so you can compare approaches. Once you settle on a layout, refine it using built-in polish workflows:
 
+**With Claude Code:**
+> "Hey Claude, run `/audit` then `/polish` on my Variant A page. Fix any spacing or accessibility issues, then `/animate` the key interactions."
+
+**With AntiGravity:**
 > "Hey AntiGravity, run the `/slash-command impeccable_refinement` workflow on Variant A."
-> _(AntiGravity will audit accessibility, critique the UX, fix spacing, and add subtle animations)._
+
+Both will audit accessibility, critique the UX, fix spacing, and add subtle animations.
 
 ### Phase 5.5: Security & Best Practices
 
@@ -111,7 +118,8 @@ Before pushing your code to live users, it's critical to ensure it is secure and
 Deployment tools like Vercel need your code to be safely stored on GitHub. If you don't know Git commands, let the AI do it for you:
 
 1. Open your terminal or AI Chat.
-2. Say: _"Hey Claude (or AntiGravity), please save my work, commit all my recent changes, and push them to GitHub."_
+2. Say: _"Hey Claude, please save my work, commit all my recent changes, and push them to GitHub."_
+   _(You can do this from either Claude Code or AntiGravity — both can run git commands.)_
 
 ### Phase 6: Testing on Users (Vercel Deployment)
 
