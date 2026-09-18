@@ -73,4 +73,4 @@ Fill in realistic content—no placeholder brackets like "[Insert here]".
 
 ## Full Agent Definition
 
-For complete capabilities and examples, see: `.claude/skills/pm-generate-prd.js`
+For complete capabilities and examples, see: `.claude/skills/pm-generate-prd/SKILL.md`

@@ -48,7 +48,7 @@ node template.config.js
 Or manually update:
 - `package.json` - Project name and version
 - `app/layout.tsx` - App metadata
-- `.cursor/rules/project-context.mdc` - Project context. You can fill it manually or run the setup-project-context command: reference it with `@setup-project-context` and optionally a PRD path (e.g. `@setup-project-context use docs/prds/my-prd.md`) to pre-fill from a PRD, then answer a few questions. When done, the file will have `alwaysApply: true` so the AI gets it every session. After adding research in `docs/research/` (e.g. `user-personas.md`), run `@sync-research-to-context` to update the User Personas section from research.
+- `.cursor/rules/project-context.mdc` - Project context. You can fill it manually or run the setup-project-context command: reference it with `@setup-project-context` and optionally a PRD path (e.g. `@setup-project-context use docs/prds/my-prd.md`) to pre-fill from a PRD, then answer a few questions. When done, the file will have `alwaysApply: true` so the AI gets it every session. After you add your own research notes to `docs/research/` (that folder starts empty - a file such as `user-personas.md` is one you create), run `@sync-research-to-context` to update the User Personas section from them.
 
 ### 4. Git Setup
 
@@ -64,7 +64,27 @@ git add .
 git commit -m "Initial commit from workspace template"
 ```
 
-### 5. Start Development Server
+### 5. Enable Quality Checks (Optional)
+
+Git does not share hooks between clones, so enable them once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+This runs ESLint and a TypeScript type check before each commit. The checks are
+**lenient** — they report problems but never block the commit, which suits rapid
+prototyping.
+
+To skip them for a single commit:
+
+```bash
+SKIP_QUALITY_GATE=1 git commit -m "message"
+```
+
+To turn them off entirely: `git config --unset core.hooksPath`
+
+### 6. Start Development Server
 
 ```bash
 npm run dev

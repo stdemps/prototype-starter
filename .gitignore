@@ -26,9 +26,31 @@ yarn-error.log*
 firebase-debug.log
 firebase-debug.*.log
 
-# local env files
+# local env files - every variant, except the example we ship
 .env*.local
 .env
+.env*
+!.env.example
+
+# credentials and service accounts (Firebase, Google Cloud, etc.)
+# These files contain private keys. Never commit them.
+*credentials*.json
+*service-account*.json
+serviceAccount*.json
+*-service-account*.json
+gcloud-*.json
+
+# private keys and certificates
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*_rsa
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
 
 # vercel
 .vercel

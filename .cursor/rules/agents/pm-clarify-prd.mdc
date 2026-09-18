@@ -77,4 +77,4 @@ After all questions are complete:
 
 ## Full Agent Definition
 
-For complete capabilities and examples, see: `.claude/skills/pm-clarify-prd.js`
+For complete capabilities and examples, see: `.claude/skills/pm-clarify-prd/SKILL.md`

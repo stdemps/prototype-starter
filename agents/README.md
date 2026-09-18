@@ -69,11 +69,13 @@ Feel free to modify agent definitions to match your team's needs:
 
 ## Files
 
-Agent definitions in this folder (markdown) and in `.claude/agents/` (JavaScript for Claude Code):
+Agent definitions in this folder (background reading) and in `.claude/agents/` (the versions Claude Code actually loads):
 
 - `designer.md` — Design/UX agent
 - `engineer.md` — Engineering/Technical agent
 - `executive.md` — Business/Strategy agent
 - `user-researcher.md` — User Research agent
 
-The **PM** agent is defined in `.claude/agents/pm.js` and `.cursor/rules/agents/pm.mdc` (no separate markdown file in this folder).
+The **PM** agent is defined in `.claude/agents/pm.md` and `.cursor/rules/agents/pm.mdc` (no separate markdown file in this folder).
+
+All five agents (`designer`, `engineer`, `executive`, `pm`, `user-researcher`) live in `.claude/agents/` as markdown files. That is the format Claude Code reads.

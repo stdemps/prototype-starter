@@ -78,4 +78,4 @@ Only after all 6 passes are complete, create:
 
 ## Full Agent Definition
 
-For complete capabilities, examples, and detailed pass requirements, see: `.claude/skills/designer-prd-to-ux.js`
+For complete capabilities, examples, and detailed pass requirements, see: `.claude/skills/designer-prd-to-ux/SKILL.md`
