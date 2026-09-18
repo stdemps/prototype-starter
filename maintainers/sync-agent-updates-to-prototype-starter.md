@@ -19,7 +19,7 @@ When you update agents, tools-and-context guidance, or MCP config in **product-w
 ### 3. Naming consistency (ux-to-implementation-plan)
 
 - Cursor rule: `.cursor/rules/agents/ux-to-implementation-plan.mdc`
-- Claude skill: `.claude/skills/ux-to-implementation-plan.js`
+- Claude skill: `.claude/skills/ux-to-implementation-plan/SKILL.md`
 - All docs and pipeline diagrams use `/ux-to-implementation-plan`.
 
 ---
@@ -62,29 +62,32 @@ cp .cursor/rules/agents/pm-generate-prd.mdc $PROTOTYPE_STARTER/.cursor/rules/age
 
 ```bash
 cp docs/agent-tools-and-context.md           $PROTOTYPE_STARTER/docs/
-cp docs/sync-agent-updates-to-prototype-starter.md $PROTOTYPE_STARTER/docs/  # optional
+cp maintainers/sync-agent-updates-to-prototype-starter.md $PROTOTYPE_STARTER/maintainers/  # optional
 ```
 
 ### Claude agents (if prototype-starter has .claude/agents/)
 
 ```bash
-cp .claude/agents/engineer.js    $PROTOTYPE_STARTER/.claude/agents/
-cp .claude/agents/designer.js    $PROTOTYPE_STARTER/.claude/agents/
-cp .claude/agents/pm.js          $PROTOTYPE_STARTER/.claude/agents/
-cp .claude/agents/executive.js   $PROTOTYPE_STARTER/.claude/agents/
-cp .claude/agents/user-researcher.js $PROTOTYPE_STARTER/.claude/agents/
+cp .claude/agents/engineer.md    $PROTOTYPE_STARTER/.claude/agents/
+cp .claude/agents/designer.md    $PROTOTYPE_STARTER/.claude/agents/
+cp .claude/agents/pm.md          $PROTOTYPE_STARTER/.claude/agents/
+cp .claude/agents/executive.md   $PROTOTYPE_STARTER/.claude/agents/
+cp .claude/agents/user-researcher.md $PROTOTYPE_STARTER/.claude/agents/
 ```
 
 ### Claude skills (if prototype-starter has .claude/skills/)
 
+Each skill is a folder containing a `SKILL.md`, so copy the whole folder (`-r`):
+
 ```bash
-cp .claude/skills/engineer-review.js      $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/designer-review.js     $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/designer-prd-to-ux.js   $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/ux-to-implementation-plan.js $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/designer-brand-identity.js   $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/pm-clarify-prd.js       $PROTOTYPE_STARTER/.claude/skills/
-cp .claude/skills/prd-review.js           $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/engineer-review           $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/designer-review           $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/designer-prd-to-ux        $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/ux-to-implementation-plan $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/designer-brand-identity   $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/pm-clarify-prd            $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/pm-generate-prd           $PROTOTYPE_STARTER/.claude/skills/
+cp -r .claude/skills/prd-review                $PROTOTYPE_STARTER/.claude/skills/
 ```
 
 ### MCP and setup (optional for minimal template)
@@ -115,5 +118,5 @@ The script only copies into **existing** directories (e.g. if prototype-starter 
 ## After Copying
 
 1. In prototype-starter, ensure any paths in the copied files (e.g. `docs/agent-tools-and-context.md`, `docs/prds/template-prd.md`) exist or adjust paths if the repo layout differs.
-2. If prototype-starter uses a different `claude.json`, add or update the `ux-to-implementation-plan` skill entry to point to `./skills/ux-to-implementation-plan.js`.
+2. Skills are auto-discovered from `.claude/skills/<name>/SKILL.md` — no registration file to update. Just ensure the folder and its `SKILL.md` frontmatter (`name`, `description`) are present.
 3. Run a quick sanity check (e.g. run one agent or skill in prototype-starter) to confirm nothing is broken.

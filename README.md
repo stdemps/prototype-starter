@@ -69,16 +69,27 @@ later sessions start knowing your product instead of starting from nothing.
    ```bash
    npm install
    ```
+   This also switches on the pre-commit checks for you.
 
-3. **Run the customization script (optional):**
-   ```bash
-   node template.config.js
-   ```
-
-4. **Start development server:**
+3. **Start it up:**
    ```bash
    npm run dev
    ```
+   Open http://localhost:3000. You should see a working page. That's it running.
+
+4. **Meet your agent:**
+
+   Open the project in Claude Code or Cursor and type:
+   ```
+   /meet-your-agent
+   ```
+   It will look around, explain back what it thinks you're building, and agree with
+   you how you'll work together. It changes nothing until you say so.
+
+### When you need it
+
+One thing you don't need yet: **renaming the project.** Run
+`node template.config.js` to swap the placeholder name for yours.
 
 5. **Open in Cursor:**
    - Open the project in Cursor
