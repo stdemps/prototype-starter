@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Pre-commit hook: runs the lenient quality gate.
+# Never blocks a commit. Set SKIP_QUALITY_GATE=1 to skip entirely.
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+GATE="$ROOT/.claude/hooks/quality-gate.sh"
+
+[ -x "$GATE" ] || exit 0
+
+"$GATE"
+exit 0
