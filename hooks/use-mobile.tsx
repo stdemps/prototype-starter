@@ -5,20 +5,32 @@ import * as React from "react"
 const MOBILE_BREAKPOINT = 640
 const COMPACT_BREAKPOINT = 1024
 
-function useBreakpoint(breakpoint: number) {
-  const [below, setBelow] = React.useState(false)
-
-  React.useEffect(() => {
+// useSyncExternalStore is React's built-in way to read from something outside
+// React - here, the browser's media query. It avoids setting state inside an
+// effect, which causes an extra render on every mount.
+function subscribe(breakpoint: number) {
+  return (onChange: () => void) => {
     const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
-    const onChange = (e: MediaQueryListEvent) => {
-      setBelow(e.matches)
-    }
     mql.addEventListener("change", onChange)
-    setBelow(mql.matches)
     return () => mql.removeEventListener("change", onChange)
-  }, [breakpoint])
+  }
+}
 
-  return !!below
+function useBreakpoint(breakpoint: number) {
+  const getSnapshot = React.useCallback(
+    () => window.matchMedia(`(max-width: ${breakpoint - 1}px)`).matches,
+    [breakpoint]
+  )
+
+  // On the server there is no window, so report "not below the breakpoint".
+  // The first client render corrects it.
+  const getServerSnapshot = React.useCallback(() => false, [])
+
+  return React.useSyncExternalStore(
+    React.useMemo(() => subscribe(breakpoint), [breakpoint]),
+    getSnapshot,
+    getServerSnapshot
+  )
 }
 
 /** Below 640px — phone-sized viewports */

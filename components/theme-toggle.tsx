@@ -25,6 +25,11 @@ export function ThemeToggle() {
   const { theme = "system", setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 
+  // The standard hydration guard: the server does not know the user's theme, so
+  // the first paint must match the server and then correct itself. Setting state
+  // in an effect is how you detect "we are now on the client", and there is no
+  // alternative that keeps the markup identical on both sides.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   React.useEffect(() => setMounted(true), [])
 
   const currentLabel = THEME_LABELS[theme] ?? "System"
