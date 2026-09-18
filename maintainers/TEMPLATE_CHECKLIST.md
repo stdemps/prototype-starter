@@ -25,7 +25,6 @@ Use this checklist before committing changes to ensure the template remains clea
 - [ ] README.md is comprehensive and clear
 - [ ] SETUP.md provides step-by-step instructions
 - [ ] All links in documentation work
-- [ ] TEMPLATE_READINESS.md is up to date
 - [ ] No broken references or TODO items in public docs
 
 ## ✅ Code Quality
@@ -54,7 +53,7 @@ Use this checklist before committing changes to ensure the template remains clea
 
 - [ ] `template.config.js` works correctly
 - [ ] `scripts/create-workspace.sh` works correctly
-- [ ] `scripts/sync-to-product-workspace.sh` uses relative paths
+- [ ] `maintainers/sync-to-product-workspace.sh` uses relative paths
 - [ ] All scripts have proper error handling
 
 ## Quick Verification Commands
@@ -82,4 +81,4 @@ node template.config.js
 2. Check `git diff` for any unexpected changes
 3. Verify no sensitive data in diffs
 4. Test cloning in a fresh directory if possible
-5. Review TEMPLATE_READINESS.md checklist
+5. Confirm README and SETUP still match what ships

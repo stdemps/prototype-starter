@@ -6,6 +6,23 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
 
 > **Need comprehensive product development features?** Check out [product-workspace](https://github.com/yourusername/product-workspace) for multi-agent collaboration, quality gates, and mobile-first enforcement.
 
+## New here? Start with this
+
+Clone, run `npm install`, then open the project in Claude Code or Cursor and type:
+
+```
+/meet-your-agent
+```
+
+The agent will look around the project, explain back what it thinks you are
+building, interview you about the things the code cannot tell it, and agree with you
+how the two of you are going to work. It changes nothing until you say so.
+
+That conversation fills in `CURRENT-WORK.md` and `DESIGN_SYSTEM.md` for you, so
+later sessions start knowing your product instead of starting from nothing.
+
+**Everything below is reference.** You do not need to read it before you begin.
+
 ## Features
 
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
@@ -52,16 +69,27 @@ A minimal workspace template for rapid prototyping with Next.js, TypeScript, Tai
    ```bash
    npm install
    ```
+   This also switches on the pre-commit checks for you.
 
-3. **Run the customization script (optional):**
-   ```bash
-   node template.config.js
-   ```
-
-4. **Start development server:**
+3. **Start it up:**
    ```bash
    npm run dev
    ```
+   Open http://localhost:3000. You should see a working page. That's it running.
+
+4. **Meet your agent:**
+
+   Open the project in Claude Code or Cursor and type:
+   ```
+   /meet-your-agent
+   ```
+   It will look around, explain back what it thinks you're building, and agree with
+   you how you'll work together. It changes nothing until you say so.
+
+### When you need it
+
+One thing you don't need yet: **renaming the project.** Run
+`node template.config.js` to swap the placeholder name for yours.
 
 5. **Open in Cursor:**
    - Open the project in Cursor
@@ -89,11 +117,10 @@ prototype-starter/
 │   │   ├── frontend-design/    # Primary design guidance
 │   │   ├── ui-ux-pro-max/      # Design reference database
 │   │   ├── vercel-react-best-practices/  # React/Next.js patterns
-│   │   ├── pm-generate-prd.js  # PRD pipeline skills
+│   │   ├── pm-generate-prd/    # PRD pipeline skills
 │   │   └── ...
-│   ├── hooks/
-│   │   └── quality-gate.sh     # Lenient pre-commit checks
-│   └── claude.json             # Claude Code config
+│   └── hooks/
+│       └── quality-gate.sh     # Lenient pre-commit checks
 ├── .cursor/                    # Cursor configuration (mirrors .claude/)
 │   ├── SKILLS.md               # Skills reference for Cursor
 │   ├── commands/               # Impeccable commands (@ mention)
@@ -215,7 +242,7 @@ UX Spec → /ux-to-implementation-plan → Implementation Plan
 Implementation Plan → Work through tasks incrementally → Code
 ```
 
-**Skills (Claude Code — names match claude.json keys):**
+**Skills (Claude Code — auto-discovered from `.claude/skills/`):**
 - `/pm-generate-prd "your idea"` - Convert rough MVP ideas into structured PRDs
 - `/pm-clarify-prd docs/prds/feature.md` - Refine PRDs through structured Q&A
 - `/designer-prd-to-ux docs/prds/feature.md` - Translate PRDs into UX specs (6 designer passes)
@@ -370,7 +397,8 @@ npx shadcn@latest add [component-name]
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run lint` - Run ESLint - flags messy or risky code patterns
+- `npm run typecheck` - Catches mismatched data (e.g. a number where text was expected) before you run the app
 
 ## Related Projects
 

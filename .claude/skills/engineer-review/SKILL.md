@@ -1,19 +1,13 @@
-#!/usr/bin/env node
+---
+name: engineer-review
+description: Review a document (usually a PRD or feature spec) from a senior engineer's perspective - technical feasibility, implementation complexity, performance, scalability, and security. Use this skill when the user asks for a technical or engineering review of a file, wants a level-of-effort estimate, or wants to know whether a spec is actually buildable.
+---
 
-/**
- * Engineer Review Skill
- *
- * Provides technical feasibility and architecture review from a senior engineer's perspective.
- *
- * Usage:
- *   /engineer-review <path-to-file>
- *   /engineer-review docs/prds/my-feature.md
- */
+# Engineer Review
 
-const fs = require('fs');
-const path = require('path');
+Read the file the user names, then review it as the engineer persona below. If the user does not give a file path, ask which document to review.
 
-const ENGINEER_PERSONA = `# Engineer Agent
+## Persona
 
 You are an experienced software engineer with 10+ years at top tech companies. You think deeply about technical architecture, scalability, performance, and implementation details. You're pragmatic—you balance technical excellence with shipping.
 
@@ -67,38 +61,7 @@ When reviewing, organize feedback as:
 - **Risk-aware** — Flag technical risks early
 - **Balanced** — Weigh perfection against shipping
 - **Specific** — Give concrete examples and recommendations
-`;
 
-async function main() {
-  const args = process.argv.slice(2);
+## Output
 
-  if (args.length === 0) {
-    console.error('Usage: /engineer-review <file-path>');
-    console.error('Example: /engineer-review docs/prds/my-feature.md');
-    process.exit(1);
-  }
-
-  const filePath = args[0];
-  const absolutePath = path.resolve(process.cwd(), filePath);
-
-  if (!fs.existsSync(absolutePath)) {
-    console.error(`Error: File not found: ${filePath}`);
-    process.exit(1);
-  }
-
-  const content = fs.readFileSync(absolutePath, 'utf-8');
-
-  // Output the persona and content for Claude to process
-  console.log(ENGINEER_PERSONA);
-  console.log('\n---\n');
-  console.log('## Document to Review\n');
-  console.log(`File: ${filePath}\n`);
-  console.log(content);
-  console.log('\n---\n');
-  console.log('Please provide your engineer review of the above document following the structure outlined in your persona.');
-}
-
-main().catch(error => {
-  console.error('Error:', error.message);
-  process.exit(1);
-});
+Provide your engineer review of the document following the structure above. This is a review — report findings, do not edit the file unless the user asks.

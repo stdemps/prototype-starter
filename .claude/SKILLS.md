@@ -53,7 +53,7 @@ Use these for quick questions and the PRD pipeline workflow.
 
 ## Project Context
 
-Capture product context (goals, personas, philosophy, priorities) so the AI has it every session. Run **`/setup-project-context`** to answer a short Q&A; optionally pass a PRD path to pre-fill (e.g. `/setup-project-context docs/prds/my-prd.md`). Writes to `.cursor/rules/project-context.mdc` (shared with Cursor). When you generate or share a first PRD, the PM skills may suggest this workflow. After you add or update research in `docs/research/` (e.g. `user-personas.md`, `pain-points-synthesis.md`), run **`/sync-research-to-context`** to update the User Personas (and optionally Key Terminology) section of project context from that research.
+Capture product context (goals, personas, philosophy, priorities) so the AI has it every session. Run **`/setup-project-context`** to answer a short Q&A; optionally pass a PRD path to pre-fill (e.g. `/setup-project-context docs/prds/my-prd.md`). Writes to `.cursor/rules/project-context.mdc` (shared with Cursor). When you generate or share a first PRD, the PM skills may suggest this workflow. After you add or update your own research notes in `docs/research/` (that folder starts empty - files such as `user-personas.md` or `pain-points-synthesis.md` are ones you create), run **`/sync-research-to-context`** to update the User Personas (and optionally Key Terminology) section of project context from that research.
 
 ---
 
@@ -63,9 +63,9 @@ For turning ideas into buildable specs.
 
 | Skill | Purpose | Input → Output |
 |-------|---------|----------------|
-| `/pm-generate-prd` | Create PRD from idea | Idea → `docs/prds/feature.md` |
+| `/pm-generate-prd` | Create PRD from idea | Idea → a new file such as `docs/prds/your-feature.md` |
 | `/pm-clarify-prd` | Refine PRD with Q&A | PRD → Refined PRD |
-| `/designer-prd-to-ux` | Translate PRD to UX spec | PRD → `feature-ux-spec.md` |
+| `/designer-prd-to-ux` | Translate PRD to UX spec | PRD → a new file such as `your-feature-ux-spec.md` |
 | `/ux-to-implementation-plan` | Create implementation plan | UX spec → Task list |
 | `/designer-brand-identity` | Brand tokens and voice | — → Design tokens |
 

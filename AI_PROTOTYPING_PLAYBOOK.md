@@ -39,13 +39,18 @@ Claude Code can be extended with "superpowers" via the Model Context Protocol (M
 
 ### Setting up the Figma MCP
 
-1. Get a **Figma Personal Access Token** (Settings -> Personal access tokens).
-2. Open your terminal and run the following command to install the Figma MCP server into Claude Code:
+Figma has its own built-in Dev Mode MCP server. There is nothing to install from npm, and you never paste a token into your terminal.
+
+1. Open the **Figma desktop app** (this doesn't work in the browser version).
+2. In Figma, go to the **Figma menu → Preferences** and turn on **Enable local MCP server**. Figma will confirm it's running at `http://127.0.0.1:3845/mcp`.
+3. Connect Claude Code to it:
    ```bash
-   claude mcp add figma npx -y @modelcontextprotocol/server-figma <YOUR_FIGMA_TOKEN>
+   claude mcp add --transport http figma http://127.0.0.1:3845/mcp
    ```
-3. Once running, you can paste Figma node URLs directly into Claude:
-   > "Hey Claude, act as my `@designer` and extract the component hierarchy for this frame: `https://www.figma.com/file/...`"
+4. Select a frame in Figma, then ask Claude about it:
+   > "Hey Claude, act as my `@designer` and extract the component hierarchy for the frame I have selected in Figma."
+
+**If this doesn't work:** Dev Mode MCP needs a paid Figma seat, and the exact menu wording changes between Figma versions. Search Figma's help for "Dev Mode MCP server" for their current instructions. This step is optional — everything else in this playbook works without it.
 
 ---
 
@@ -59,7 +64,7 @@ Before pushing pixels, use Claude Code to pressure-test your ideas. Claude comes
 
 - run `/pm` to discuss feature scope, prioritization, and user journeys.
 - run `/user-researcher` to validate your assumptions and outline a testing plan.
-- _Tip:_ If you write down your ideas in a PRD document (e.g., `docs/prds/idea.md`), you can use `/setup-project-context docs/prds/idea.md` to load it into the AI's long-term memory.
+- _Tip:_ If you write your ideas into a PRD document of your own (say `docs/prds/idea.md` - you create this file; `docs/prds/` ships with just a template), you can use `/setup-project-context docs/prds/idea.md` to load it into the AI's long-term memory.
 
 ### Phase 2: Visual Design (Figma)
 

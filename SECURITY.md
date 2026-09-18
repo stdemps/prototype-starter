@@ -35,7 +35,7 @@ This template does not include an auth implementation. When you add one:
 ## Security tooling and CI
 
 - **Lint and type-check:** The template recommends running `npm run lint` and `npx tsc --noEmit` in CI (see `docs/examples/github-actions-ci.yml`).
-- **SAST:** Use static analysis (e.g. Semgrep, CodeQL) in CI. Example workflow: `docs/examples/github-actions-sast.yml`. Cursor/Claude rules in `.cursor/rules/` (e.g. `security-sast.mdc`, `security-hardening.mdc`) describe how to integrate and tune these tools.
+- **SAST:** Use static analysis (e.g. Semgrep, CodeQL) in CI. Example workflow: `docs/examples/github-actions-sast.yml`.
 - **Dependencies:** Run `npm audit` regularly and fix high/critical issues. Consider enabling Dependabot or similar for dependency updates.
 
 ## Reporting vulnerabilities

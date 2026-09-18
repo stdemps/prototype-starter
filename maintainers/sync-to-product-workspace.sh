@@ -63,9 +63,9 @@ echo ""
 
 # Files to sync
 declare -a AGENT_FILES=(
-  ".claude/agents/executive.js"
-  ".claude/agents/user-researcher.js"
-  ".claude/agents/pm.js"
+  ".claude/agents/executive.md"
+  ".claude/agents/user-researcher.md"
+  ".claude/agents/pm.md"
 )
 
 declare -a CURSOR_RULES=(
@@ -189,46 +189,8 @@ for file in "${CONFIG_FILES[@]}"; do
   copy_file "$file" "$TARGET_DIR/$file"
 done
 
-# Handle claude.json merge
-echo ""
-echo "⚙️  Merging claude.json..."
-
-if [ ! -f "$TARGET_DIR/.claude/claude.json" ]; then
-  echo "  ⚠️  Target claude.json not found, copying..."
-  mkdir -p "$TARGET_DIR/.claude"
-  cp "$SOURCE_DIR/.claude/claude.json" "$TARGET_DIR/.claude/claude.json"
-  UPDATED_FILES+=(".claude/claude.json")
-else
-  # Merge strategy: add missing entries from source, preserve existing ones
-  echo "  🔀 Merging configuration..."
-  
-  # Create temp files for merging
-  TEMP_SOURCE=$(mktemp)
-  TEMP_TARGET=$(mktemp)
-  TEMP_MERGED=$(mktemp)
-  
-  # Extract skills section from both files
-  jq '.skills' "$SOURCE_DIR/.claude/claude.json" > "$TEMP_SOURCE"
-  jq '.skills' "$TARGET_DIR/.claude/claude.json" > "$TEMP_TARGET"
-  
-  # Merge: start with target, add/update from source
-  jq -s '.[0] * .[1]' "$TEMP_TARGET" "$TEMP_SOURCE" > "$TEMP_MERGED"
-  
-  # Reconstruct full JSON with merged skills
-  jq --argjson skills "$(cat "$TEMP_MERGED")" '.skills = $skills' "$TARGET_DIR/.claude/claude.json" > "$TEMP_TARGET"
-  
-  # Check if merge changed anything
-  if ! cmp -s "$TARGET_DIR/.claude/claude.json" "$TEMP_TARGET"; then
-    cp "$TEMP_TARGET" "$TARGET_DIR/.claude/claude.json"
-    UPDATED_FILES+=(".claude/claude.json")
-    echo "  ✅ Merged:    .claude/claude.json"
-  else
-    echo "  ⏭️  Unchanged: .claude/claude.json (all entries already present)"
-  fi
-  
-  # Cleanup
-  rm -f "$TEMP_SOURCE" "$TEMP_TARGET" "$TEMP_MERGED"
-fi
+# Skills are auto-discovered from .claude/skills/<name>/SKILL.md — no registry
+# file to merge. The directory sync above already copies them.
 
 # Summary
 echo ""
