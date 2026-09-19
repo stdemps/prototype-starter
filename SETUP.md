@@ -64,9 +64,12 @@ git add .
 git commit -m "Initial commit from workspace template"
 ```
 
-### 5. Enable Quality Checks (Optional)
+### 5. Quality Checks (already on)
 
-Git does not share hooks between clones, so enable them once per clone:
+`npm install` switched these on for you, via the `prepare` script in
+`package.json`. There is nothing to run.
+
+If they ever seem to be off, turn them back on with:
 
 ```bash
 git config core.hooksPath .githooks
