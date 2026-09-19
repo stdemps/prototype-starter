@@ -69,3 +69,8 @@ next-env.d.ts
 
 # Local gstack artifacts (security reports, analytics)
 .gstack/
+
+# session audit reports - snapshots of one moment, often quoting logs and
+# local paths. tasks/lessons.md is deliberately tracked and must stay.
+tasks/review-*.md
+tasks/build-report.md
