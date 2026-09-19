@@ -61,3 +61,18 @@ Focus on:
 ## Output
 
 Provide your comprehensive review with a section for each of the four perspectives above. This is a review — report findings, do not edit the PRD unless the user asks.
+
+
+---
+
+## Handing off
+
+Your closing "concrete next action" should name the actual next command, not just
+describe work:
+
+- **Blocking problems found** → `/pm-clarify-prd` to resolve them, then come back.
+- **PRD holds up** → `/designer-prd-to-ux` to turn it into a UX spec.
+- **Specific UX concerns raised** → `/ux-designer` for the flow, or
+  `/ux-copywriter` for the wording.
+
+Name one, not all of them. The user needs a next step, not a directory.
