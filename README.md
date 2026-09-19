@@ -21,6 +21,11 @@ how the two of you are going to work. It changes nothing until you say so.
 That conversation fills in `CURRENT-WORK.md` and `DESIGN_SYSTEM.md` for you, so
 later sessions start knowing your product instead of starting from nothing.
 
+**One optional extra:** some commands in these docs come from plugins, not from
+this repo. If one is missing, install it with `/plugin install <name>` — the
+useful one to start with is `superpowers@claude-plugins-official`. Everything
+this template ships works without them.
+
 **Everything below is reference.** You do not need to read it before you begin.
 
 ## Features
