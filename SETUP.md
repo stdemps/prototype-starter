@@ -27,7 +27,7 @@ Workspace settings (format on save, ESLint, Tailwind, recommended extensions) ar
 **Option B: Clone Directly**
 
 ```bash
-git clone https://github.com/yourusername/prototype-starter.git my-project
+git clone https://github.com/stdemps/prototype-starter.git my-project
 cd my-project
 ```
 
