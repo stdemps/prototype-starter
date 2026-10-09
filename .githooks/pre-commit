@@ -5,6 +5,10 @@
 
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 GATE="$ROOT/.claude/hooks/quality-gate.sh"
+DRIFT="$ROOT/scripts/check-command-drift.sh"
+
+# Warn (never block) if a .claude command and its .cursor copy drift apart.
+[ -x "$DRIFT" ] && { "$DRIFT" || true; }
 
 [ -x "$GATE" ] || exit 0
 
