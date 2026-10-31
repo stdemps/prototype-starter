@@ -45,7 +45,7 @@ this template ships works without them.
 - **Zero-config start:** Clone, `npm install`, `npm run dev` → working app
 - **Two workflow approaches:** PRD-to-code pipeline for structured specs OR direct guidance for quick questions
 - **Quick AI guidance:** Built-in agents (`/engineer`, `/designer`, `/pm`) for instant help
-- **UI refinement commands:** 17 Impeccable commands (`/audit`, `/polish`, `/simplify`, etc.) for quality and polish
+- **UI refinement commands:** 17 Impeccable commands (`/audit`, `/polish`, `/simplify-design`, etc.) for quality and polish
 - **PRD pipeline:** Turn ideas into buildable specs (Idea → PRD → UX → Implementation Plan)
 - **Design skills:** `frontend-design` for creative UI, `ui-ux-pro-max` for design lookups, `vercel-react-best-practices` for performance
 - **Lenient quality checks:** Pre-commit checks that warn but never block (perfect for prototyping)
@@ -128,7 +128,7 @@ prototype-starter/
 │   ├── commands/               # Impeccable UI refinement commands
 │   │   ├── audit.md            # Quality checks
 │   │   ├── polish.md           # Final refinement
-│   │   ├── simplify.md         # Remove complexity
+│   │   ├── simplify-design.md  # Remove complexity
 │   │   └── ...                 # 14 more commands
 │   ├── skills/                 # AI skills
 │   │   ├── frontend-design/    # Primary design guidance
@@ -215,7 +215,7 @@ Polish and refine your UI with these specialized commands. Run `/teach-impeccabl
 
 **Simplification & Cleanup:**
 ```bash
-/simplify        # Remove unnecessary complexity
+/simplify-design # Remove unnecessary complexity
 /normalize       # Align with design system
 /clarify         # Improve UX copy and labels
 ```
